@@ -7,9 +7,9 @@ DB_PASSWORD=P@$ZwoRd2k240710_@dec
 */
 				date_default_timezone_set('Asia/Manila');	
 				$servername = "localhost";
-				$username = "amropus_dbuser";
-				$password = 'P@$ZwoRd2k240710_@dec';
-				$dbname = "meter_reading_robinsons";
+				$username = "dbuser";
+				$password = '';
+				$dbname = "meter_reading";
 
 				// Create connection
 				$conn = mysqli_connect($servername, $username, $password, $dbname);

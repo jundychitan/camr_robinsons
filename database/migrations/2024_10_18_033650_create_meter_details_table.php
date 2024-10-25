@@ -38,7 +38,7 @@ return new class extends Migration
             $table->integer('modified_by_user_idx');
         });
     }
-
+   
     /**
      * Reverse the migrations.
      */

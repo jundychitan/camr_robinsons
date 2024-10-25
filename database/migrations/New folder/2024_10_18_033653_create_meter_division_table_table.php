@@ -12,13 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('meter_division_table', function (Blueprint $table) {
-            $table->integer('division_id')->key()->autoIncrement();
+            $table->integer('division_id')->primary()->autoIncrement();
             $table->string('division_code', 255);
             $table->string('division_name', 255);
-            $table->integer('created_by_user_idx');
-            $table->dateTime('created_at')->nullable()->default(NULL);
-            $table->integer('modified_by_user_idx');
-            $table->dateTime('updated_at')->nullable()->default(NULL);
+            $table->timestamp('created_at')->nullable()->default('DEFAULT NULL');
+            $table->integer('created_by_user_idx')->nullable()->default('DEFAULT NULL');
+            $table->timestamp('updated_at')->nullable()->default('DEFAULT NULL');
+            $table->integer('modified_by_user_idx')->nullable()->default('DEFAULT NULL');
         });
     }
 

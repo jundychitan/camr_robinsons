@@ -12,19 +12,19 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('meter_building_table', function (Blueprint $table) {
-            $table->integer('building_id')->key()->autoIncrement();
+            $table->integer('building_id')->primary()->autoIncrement();
             $table->integer('site_idx');
             $table->string('building_code', 255);
             $table->string('building_description', 255);
-            $table->integer('cut_off')->nullable()->default(NULL);
+            $table->integer('cut_off')->nullable()->default('DEFAULT NULL');
             $table->string('device_ip_range', 255)->nullable();
             $table->string('ip_network', 255)->nullable();
             $table->string('ip_netmask', 255)->nullable();
             $table->string('ip_gateway', 255)->nullable();
-            $table->dateTime('created_at')->nullable()->default(NULL);
-            $table->integer('created_by_user_idx')->nullable()->default(NULL);
-            $table->dateTime('updated_at')->nullable()->default(NULL);
-            $table->integer('modified_by_user_idx')->nullable()->default(NULL);
+            $table->string('created_at', 50)->nullable()->default('DEFAULT NULL');
+            $table->integer('created_by_user_idx')->nullable()->default('DEFAULT NULL');
+            $table->string('updated_at', 50)->nullable()->default('DEFAULT NULL');
+            $table->integer('modified_by_user_idx')->nullable()->default('DEFAULT NULL');
         });
     }
 

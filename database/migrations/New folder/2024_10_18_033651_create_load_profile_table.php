@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('load_profile', function (Blueprint $table) {
-            $table->integer('id')->key()->autoIncrement();
+            $table->integer('id')->primary()->autoIncrement();
             $table->text('meter_id');
-            $table->text('datetime')->nullable()->default(NULL);
+            $table->text('datetime')->nullable()->default('DEFAULT NULL');
             $table->text('event_id');
             $table->float('ch_1')->comment('1.5.0_kW');
             $table->double('ch_2')->comment('1-1:1.30.2_kWh');
@@ -26,9 +26,6 @@ return new class extends Migration
             $table->double('ch_8');
             $table->timestamp('time_import')->useCurrent();
         });
-
-        DB::statement("ALTER TABLE `load_profile` CHANGE COLUMN `id` `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT FIRST;");
-
     }
 
     /**

@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('meter_data', function (Blueprint $table) {
-            $table->integer('id')->key()->autoIncrement();
+            $table->integer('id')->primary()->autoIncrement();
             $table->string('location', 30)->default('Home');
             $table->string('meter_id', 30);
             $table->dateTime('datetime');
@@ -37,13 +37,13 @@ return new class extends Migration
             $table->double('varh_total');
             $table->double('vah_total');
             $table->double('max_rec_kw_dmd');
-            $table->dateTime('max_rec_kw_dmd_time')->nullable()->default(NULL);
+            $table->dateTime('max_rec_kw_dmd_time')->nullable()->default('DEFAULT NULL');
             $table->double('max_del_kw_dmd');
-            $table->dateTime('max_del_kw_dmd_time')->nullable()->default(NULL);
+            $table->dateTime('max_del_kw_dmd_time')->nullable()->default('DEFAULT NULL');
             $table->double('max_pos_kvar_dmd');
-            $table->dateTime('max_pos_kvar_dmd_time')->nullable()->default(NULL);
+            $table->dateTime('max_pos_kvar_dmd_time')->nullable()->default('DEFAULT NULL');
             $table->double('max_neg_kvar_dmd');
-            $table->dateTime('max_neg_kvar_dmd_time')->nullable()->default(NULL);
+            $table->dateTime('max_neg_kvar_dmd_time')->nullable()->default('DEFAULT NULL');
             $table->double('v_ph_angle_a');
             $table->double('v_ph_angle_b');
             $table->double('v_ph_angle_c');
@@ -54,12 +54,9 @@ return new class extends Migration
             $table->text('soft_rev');
             $table->integer('relay_status');
             $table->timestamp('dt')->nullable()->useCurrent();
-            $table->integer('genset_status')->nullable()->default(NULL);
+            $table->integer('genset_status')->nullable()->default('DEFAULT NULL');
             $table->index(['meter_id', 'datetime', 'location']);
         });
-
-        DB::statement("ALTER TABLE `meter_data` CHANGE COLUMN `id` `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT FIRST;");
-
     }
 
     /**

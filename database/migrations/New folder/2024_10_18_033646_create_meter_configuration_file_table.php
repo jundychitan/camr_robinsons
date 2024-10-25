@@ -12,13 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('meter_configuration_file', function (Blueprint $table) {
-            $table->integer('config_id')->key()->autoIncrement();
+            $table->integer('config_id')->primary()->autoIncrement();
             $table->text('meter_model');
             $table->text('config_file');
-            $table->integer('created_by_user_idx');
-            $table->dateTime('created_at')->nullable()->default(NULL);
-            $table->integer('modified_by_user_idx');
-            $table->dateTime('updated_at')->nullable()->default(NULL);
+            $table->string('created_by', 300);
+            $table->string('date_created', 200);
+            $table->string('modified_by', 200);
+            $table->timestamp('date_modified')->nullable()->default('DEFAULT NULL');
+            $table->integer('added_by');
         });
     }
 

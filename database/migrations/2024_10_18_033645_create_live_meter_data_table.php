@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('live_meter_data', function (Blueprint $table) {
-            $table->integer('id')->primary()->autoIncrement();
+            $table->integer('id')->key()->autoIncrement();
             $table->string('location', 30)->default('Home');
             $table->string('meter_id', 30);
             $table->dateTime('datetime');
@@ -37,23 +37,25 @@ return new class extends Migration
             $table->double('varh_total');
             $table->double('vah_total');
             $table->double('max_rec_kw_dmd');
-            $table->dateTime('max_rec_kw_dmd_time')->nullable()->default('DEFAULT NULL');
+            $table->dateTime('max_rec_kw_dmd_time')->nullable()->default(NULL);
             $table->double('max_del_kw_dmd');
-            $table->dateTime('max_del_kw_dmd_time')->nullable()->default('DEFAULT NULL');
+            $table->dateTime('max_del_kw_dmd_time')->nullable()->default(NULL);
             $table->double('max_pos_kvar_dmd');
-            $table->dateTime('max_pos_kvar_dmd_time')->nullable()->default('DEFAULT NULL');
+            $table->dateTime('max_pos_kvar_dmd_time')->nullable()->default(NULL);
             $table->double('max_neg_kvar_dmd');
-            $table->dateTime('max_neg_kvar_dmd_time')->nullable()->default('DEFAULT NULL');
-            $table->double('v_ph_angle_a')->comment('additional for sfelapco inc  ( JULY 23 ,  2018 )');
-            $table->double('v_ph_angle_b')->comment('additional for sfelapco inc  ( JULY 23 ,  2018 )');
-            $table->double('v_ph_angle_c')->comment('additional for sfelapco inc  ( JULY 23 ,  2018 )');
-            $table->double('i_ph_angle_a')->comment('additional for sfelapco inc  ( JULY 23 ,  2018 )');
-            $table->double('i_ph_angle_b')->comment('additional for sfelapco inc  ( JULY 23 ,  2018 )');
-            $table->double('i_ph_angle_c')->comment('additional for sfelapco inc  ( JULY 23 ,  2018 )');
+            $table->dateTime('max_neg_kvar_dmd_time')->nullable()->default(NULL);
+            $table->double('v_ph_angle_a');
+            $table->double('v_ph_angle_b');
+            $table->double('v_ph_angle_c');
+            $table->double('i_ph_angle_a');
+            $table->double('i_ph_angle_b');
+            $table->double('i_ph_angle_c');
             $table->text('mac_addr');
             $table->text('soft_rev');
             $table->integer('relay_status');
         });
+
+        DB::statement("ALTER TABLE `live_meter_data` CHANGE COLUMN `id` `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT FIRST;");
     }
 
     /**

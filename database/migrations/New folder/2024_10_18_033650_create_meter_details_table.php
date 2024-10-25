@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('meter_details', function (Blueprint $table) {
-            $table->integer('meter_id')->key()->autoIncrement();
+            $table->integer('meter_id')->primary()->autoIncrement();
             $table->integer('site_idx');
             $table->integer('rtu_idx');
             $table->integer('location_idx');
@@ -32,7 +32,7 @@ return new class extends Migration
             $table->string('meter_status', 50);
             $table->string('last_log_update', 30)->default('0000-00-00 00:00:00');
             $table->string('soft_rev', 50);
-            $table->dateTime('created_at')->nullable()->default(NULL);
+            $table->dateTime('created_at')->nullable()->default('DEFAULT NULL');
             $table->integer('created_by_user_idx');
             $table->dateTime('updated_at');
             $table->integer('modified_by_user_idx');

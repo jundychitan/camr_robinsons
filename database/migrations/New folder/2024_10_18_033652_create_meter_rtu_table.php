@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('meter_rtu', function (Blueprint $table) {
-            $table->integer('rtu_id')->key()->autoIncrement();
+            $table->integer('rtu_id')->primary()->autoIncrement();
             $table->integer('site_idx');
-            $table->integer('location_idx')->nullable()->default(NULL);
-            $table->string('site_code', 100)->nullable()->default(NULL);
+            $table->integer('location_idx')->nullable()->default('DEFAULT NULL');
+            $table->string('site_code', 100)->nullable()->default('DEFAULT NULL');
             $table->string('gateway_sn', 255);
             $table->string('gateway_mac', 255);
             $table->string('gateway_ip', 255);
@@ -28,9 +28,9 @@ return new class extends Migration
             $table->integer('update_rtu_location');
             $table->integer('update_rtu_ssh');
             $table->integer('update_rtu_force_lp');
-            $table->string('idf_number', 255)->nullable()->default(NULL);
-            $table->string('switch_name', 255)->nullable()->default(NULL);
-            $table->string('idf_port', 255)->nullable()->default(NULL);
+            $table->string('idf_number', 255)->nullable()->default('DEFAULT NULL');
+            $table->string('switch_name', 255)->nullable()->default('DEFAULT NULL');
+            $table->string('idf_port', 255)->nullable()->default('DEFAULT NULL');
             $table->string('created_at', 20)->nullable();
             $table->integer('created_by_user_idx');
             $table->string('updated_at', 20)->nullable();

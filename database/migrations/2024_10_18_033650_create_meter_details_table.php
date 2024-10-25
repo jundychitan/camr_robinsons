@@ -16,7 +16,7 @@ return new class extends Migration
             $table->integer('site_idx');
             $table->integer('rtu_idx');
             $table->integer('location_idx');
-            $table->integer('building_idx');
+            $table->integer('building_idx')->nullable()->default(0);;
             $table->integer('config_idx');
             $table->string('site_code', 100);
             $table->string('meter_name', 255);
@@ -31,7 +31,7 @@ return new class extends Migration
             $table->double('meter_multiplier')->default('1');
             $table->string('meter_status', 50);
             $table->string('last_log_update', 30)->default('0000-00-00 00:00:00');
-            $table->string('soft_rev', 50);
+            $table->string('soft_rev', 50)->nullable()->default(0);;
             $table->dateTime('created_at')->nullable()->default(NULL);
             $table->integer('created_by_user_idx');
             $table->dateTime('updated_at');

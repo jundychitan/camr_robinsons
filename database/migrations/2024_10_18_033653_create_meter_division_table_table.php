@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('division_name', 255);
             $table->integer('created_by_user_idx');
             $table->dateTime('created_at')->nullable()->default(NULL);
-            $table->integer('modified_by_user_idx');
+            $table->integer('modified_by_user_idx')->nullable();
             $table->dateTime('updated_at')->nullable()->default(NULL);
         });
     }

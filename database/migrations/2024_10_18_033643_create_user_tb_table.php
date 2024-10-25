@@ -27,7 +27,7 @@ return new class extends Migration
             $table->dateTime('created_at')->nullable()->default(NULL);
             $table->integer('created_by_user_idx');
             $table->dateTime('updated_at')->nullable()->default(NULL);
-            $table->integer('modified_by_user_idx');
+            $table->integer('modified_by_user_idx')->nullable();
         });
     }
 

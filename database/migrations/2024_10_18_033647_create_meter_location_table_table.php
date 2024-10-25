@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('meter_location_table', function (Blueprint $table) {
             $table->integer('location_id')->key()->autoIncrement();
             $table->integer('site_idx');
-            $table->integer('building_id');
+            $table->integer('building_id')->nullable()->default(0);
             $table->string('location_code', 255);
             $table->string('location_description', 255);
             $table->timestamp('created_at')->nullable()->default(NULL);

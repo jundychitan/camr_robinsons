@@ -15,15 +15,14 @@ return new class extends Migration
             $table->integer('site_id')->key()->autoIncrement();
             $table->integer('division_idx')->comment('The Value of this column is from division_table');
             $table->integer('company_idx')->comment('The Value of this column is from company_table');
-            $table->integer('building_idx')->comment('The Value of this column is from meter_building_table');
+            $table->integer('building_idx')->nullable()->default(0)->comment('The Value of this column is from meter_building_table');
             $table->string('site_code', 100)->nullable()->default(NULL)->comment('Building Code as Site Code');
             $table->integer('created_by_user_idx');
             $table->dateTime('created_at')->nullable()->default(NULL);
-            $table->integer('modified_by_user_idx');
+            $table->integer('modified_by_user_idx')->nullable()->default(0);
             $table->dateTime('updated_at')->nullable()->default(NULL);
-            $table->string('last_log_update', 255);
+            $table->dateTime('last_log_update')->nullable()->default(NULL);
             $table->string('deleted_at', 50)->nullable()->default(NULL);
-
         });
     }
 

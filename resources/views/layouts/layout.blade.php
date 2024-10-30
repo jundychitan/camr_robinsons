@@ -46,9 +46,12 @@ elseif (Request::is('user')){
 }
 elseif (Request::is('company')){
 ?>
- 
-
 @include('layouts.company_script')
+<?php
+}
+elseif (Request::is('configuration_file')){
+?>
+@include('layouts.configuration_file_script')
 <?php
 }
 elseif (Request::is('division')){

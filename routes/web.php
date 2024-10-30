@@ -28,6 +28,9 @@ use App\Http\Controllers\DivisionController;
 
 use App\Http\Controllers\EmailController;
 
+
+use App\Http\Controllers\ConfigurationFileController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -275,6 +278,15 @@ Route::get('/rtu/index.php/rtu/rtu_check_update/{mac}/force_lp', [CAMRGatewayDev
 Route::get('/rtu/index.php/rtu/rtu_check_update/{mac}/reset_force_lp', [CAMRGatewayDeviceController::class,'force_load_profile_status_reset'])->name('force_load_profile_status_reset');
 
 Route::post('/http_post_server', [CAMRGatewayDeviceController::class, 'http_post_server'])->name('http_post_server');
+
+/*Configuation File Info*/
+Route::get('/configuration_file', [ConfigurationFileController::class,'ConfigurationFile'])->name('ConfigurationFile')->middleware('isLoggedIn');
+Route::post('configuration_file_list', [ConfigurationFileController::class, 'getConfigurationFileList'])->name('getConfigurationFileList')->middleware('isLoggedIn');
+Route::post('create_configuration_file_post', [ConfigurationFileController::class, 'create_configuration_file_post'])->name('create_configuration_file_post')->middleware('isLoggedIn');
+Route::post('/configuration_file_info', [ConfigurationFileController::class, 'ConfigurationFile_info'])->name('ConfigurationFile_info')->middleware('isLoggedIn');
+Route::post('update_configuration_file_post', [ConfigurationFileController::class, 'update_configuration_file_post'])->name('update_configuration_file_post')->middleware('isLoggedIn');
+Route::post('/delete_configuration_file_confirmed', [ConfigurationFileController::class, 'delete_configuration_file_confirmed'])->name('delete_configuration_file_confirmed')->middleware('isLoggedIn');
+
 
 
 

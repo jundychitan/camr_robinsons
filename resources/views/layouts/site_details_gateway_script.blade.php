@@ -80,7 +80,6 @@
 					{data: 'gateway_ip', className: "text-left"},
 					{data: 'gateway_mac', className: "text-center"},
 					{data: 'location_code', className: "text-left"},
-					
 					{data: 'status', name: 'status', orderable: true, searchable: true},
 					{data: 'location_description'},
 					{data: 'idf_number'},

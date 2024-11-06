@@ -23,7 +23,7 @@
 					//scrollX: '100%',
 					ajax: "{{ route('AdminSiteList') }}",
 					columns: [
-							{data: 'DT_RowIndex', name: 'DT_RowIndex' , orderable: false, searchable: false, className: "text-right"},       
+							{data: 'DT_RowIndex', name: 'DT_RowIndex' , orderable: false, searchable: false},       
 							{data: 'building_code', className: "text-left"},
 							{data: 'building_description', className: "text-left"},
 							{data: 'company_name', className: "text-left"},
@@ -64,7 +64,7 @@
 					//scrollX: '100%',
 					ajax: "{{ route('UserSiteList') }}",
 					columns: [
-							{data: 'DT_RowIndex', name: 'DT_RowIndex' , orderable: false, searchable: false, className: "text-right"},       
+							{data: 'DT_RowIndex', name: 'DT_RowIndex' , orderable: false, searchable: false},       
 							{data: 'building_code', className: "text-left"},
 							{data: 'building_description', className: "text-left"},
 							{data: 'company_name', className: "text-left"},

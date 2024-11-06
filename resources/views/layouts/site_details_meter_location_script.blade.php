@@ -23,7 +23,7 @@
 					},
 					},
 				"columns": [
-					{data: 'DT_RowIndex', name: 'DT_RowIndex' , searchable: false},
+					{data: 'DT_RowIndex', name: 'DT_RowIndex' , searchable: false, className: "text-center"},
 					{data: 'location_code', className: "text-left" },        
 					{data: 'location_description', className: "text-left" },
 					{data: 'action', name: 'action', orderable: false, searchable: false, className: "text-center"},

@@ -4,10 +4,10 @@
 										<table class="table dataTable display nowrap cell-border" id="meterlocationlist" width="100%" cellspacing="0">
 											<thead>
 												<tr>
-													<th>#</th>
-													<th>Location Code</th>
-													<th>Location Name</th>
-													<th>Action</th>
+													<th class="all">#</th>
+													<th class="all">Location Code</th>
+													<th class="all">Location Name</th>
+													<th class="all">Action</th>
 												</tr>
 											</thead>				
 											

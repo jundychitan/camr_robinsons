@@ -114,8 +114,8 @@ class CAMRMeterLocationController extends Controller
 											)],
         ], 
         [
-			'location_code.required' => 'Meter Location Code is Required',
-			'location_description.required' => 'Meter Location Description is Required'
+			'location_code.required' => 'Location Code is Required',
+			'location_description.required' => 'Location Description is Required'
         ]
 		);	
 					
@@ -152,8 +152,8 @@ class CAMRMeterLocationController extends Controller
 											)],
         ], 
         [
-			'location_code.required' => 'Meter Location Code is Required',
-			'location_description.required' => 'Meter Location Description is Required'
+			'location_code.required' => 'Location Code is Required',
+			'location_description.required' => 'Location Description is Required'
         ]
 		);
 		

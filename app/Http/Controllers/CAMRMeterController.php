@@ -396,6 +396,7 @@ class CAMRMeterController extends Controller
 			$meter->meter_status 					= $request->meter_status;
 			$meter->meter_remarks 					= $request->meter_remarks;	
 			$meter->created_by_user_idx 			= Session::get('loginID');
+			$meter->modified_by_user_idx 			= Session::get('loginID');
 			
 			$result = $meter->save();
 			

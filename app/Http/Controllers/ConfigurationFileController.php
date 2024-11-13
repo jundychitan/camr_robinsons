@@ -99,7 +99,7 @@ class ConfigurationFileController extends Controller
 			'configuration_file_name'      	=> 'required|unique:meter_configuration_file,config_file',
         ], 
         [
-			'configuration_file_name.required' => 'Configuration File is Required',
+			'configuration_file_name.required' => 'File Name is Required',
         ]
 		);
 
@@ -127,7 +127,7 @@ class ConfigurationFileController extends Controller
 			'configuration_file_name'  => 'required|unique:meter_configuration_file,config_file,'.$request->ConfigFileID.',config_id',
 		], 
 		[
-			'configuration_file_name.required' => 'Configuration File is Required',
+			'configuration_file_name.required' => 'File Name is Required',
 		]
 		);
 			

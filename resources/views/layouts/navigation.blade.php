@@ -201,11 +201,11 @@
 			<a href="{{ route('company') }}" class="sidebar_li_a">
               <i class="bi bi-circle"></i><span>Company</span>
             </a>
-
+            <!--
             <a href="{{ route('ConfigurationFile') }}" class="sidebar_li_a">
               <i class="bi bi-circle"></i><span>Configuration File</span>
             </a>
-			
+			-->
 			<a href="{{ route('user') }}" class="sidebar_li_a">
               <i class="bi bi-circle"></i><span>User</span>
             </a>

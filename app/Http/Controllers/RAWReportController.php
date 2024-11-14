@@ -18,6 +18,8 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 
+use App\Models\WebPageSettingsModel;
+
 class RAWReportController extends Controller
 {
 	
@@ -27,7 +29,7 @@ class RAWReportController extends Controller
 		if(Session::has('loginID')){	
 
 			$title = 'RAW Report';
-			//$data = array();
+			$WebPageSettingsdata = WebPageSettingsModel::first();
 		
 			$data = User::where('user_id', '=', Session::get('loginID'))->first();			
 		
@@ -52,7 +54,7 @@ class RAWReportController extends Controller
 	
 			}
 		
-			return view("amr.raw_report", compact('data','title','site_data'));
+			return view("amr.raw_report", compact('data','title','site_data', 'WebPageSettingsdata'));
 	
 		}	
 	

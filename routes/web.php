@@ -28,8 +28,8 @@ use App\Http\Controllers\DivisionController;
 
 use App\Http\Controllers\EmailController;
 
-
 use App\Http\Controllers\ConfigurationFileController;
+use App\Http\Controllers\CAMRWebpageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -84,7 +84,6 @@ Route::post('/save_site_tab', [CAMRSiteController::class, 'save_site_tab'])->nam
 Route::get('getGateway/', [CAMRGatewayController::class,'getGateway'])->name('getGateway')->middleware('isLoggedIn');
 /*Load Offline Gateway List Persite*/
 Route::get('getOfflineGateway/', [CAMRGatewayController::class,'getOfflineGateway'])->name('getOfflineGateway')->middleware('isLoggedIn');
-
 
 /*Load Gateway List BLD and EE ROOM*/
 Route::get('getGatewayPerBLGandEEROOM/', [CAMRGatewayController::class,'getGatewayPerBLGandEEROOM'])->name('getGatewayPerBLGandEEROOM')->middleware('isLoggedIn');
@@ -205,7 +204,6 @@ Route::get('/generate_site_report_excel', [SiteReportController::class,'generate
 /*Download Meter List an Gateway*/
 Route::get('/generate_site_as_built_excel', [SiteAsBuiltController::class,'generate_site_as_built_excel'])->name('generate_site_as_built_excel')->middleware('isLoggedIn');
 
-
 /*Consumption Per Meter*/
 Route::get('/consumption_report/', [ConsumptionReportController::class,'consumption_report'])->name('ConsumptionReport')->middleware('isLoggedIn');
 /*Generate Meter Consumption Hourly*/
@@ -287,8 +285,11 @@ Route::post('/configuration_file_info', [ConfigurationFileController::class, 'Co
 Route::post('update_configuration_file_post', [ConfigurationFileController::class, 'update_configuration_file_post'])->name('update_configuration_file_post')->middleware('isLoggedIn');
 Route::post('/delete_configuration_file_confirmed', [ConfigurationFileController::class, 'delete_configuration_file_confirmed'])->name('delete_configuration_file_confirmed')->middleware('isLoggedIn');
 
-
-
+/*Web Page Settings*/
+/*Get Web Page Info*/
+Route::post('/web_settings_info', [CAMRWebpageController::class, 'web_settings_info'])->name('web_settings_info')->middleware('isLoggedIn');
+Route::post('/update_web_navigation_header_title_settings_post', [CAMRWebpageController::class, 'update_web_navigation_header_title_settings_post'])->name('update_web_navigation_header_title_settings_post')->middleware('isLoggedIn');
+Route::post('/update_logo', [CAMRWebpageController::class, 'update_logo'])->name('update_logo')->middleware('isLoggedIn');
 
 
 

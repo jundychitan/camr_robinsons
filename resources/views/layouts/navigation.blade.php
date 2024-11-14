@@ -5,8 +5,9 @@
     <div class="d-flex align-items-center justify-content-between">
 	<i class="bi bi-list toggle-sidebar-btn toggle_sidebar"></i>
       <div class="logo d-flex align-items-center">
-		<img src="{{asset('client_logo/logo.png')}}" class="rounded" alt="..." width="100px">
-        <span class="d-lg-block navbar_header_title">Centralized Automated Meter Reading</span>
+	  <!--<img src="data:image/jpeg;base64,-->
+		<img src="data:image/jpeg;base64,{{$WebPageSettingsdata->image_logo}}" class="rounded" style="width:{{$WebPageSettingsdata->header_navigation_width}}px;">
+        <span class="d-lg-block navbar_header_title" <?php if($data->user_type!="User"){ ?> id="navbar_header_title" style="cursor: pointer;" <?php } ?>><?php echo $WebPageSettingsdata->navigation_header_title; ?></span>
       </div>
       
     </div><!-- End Logo -->
@@ -308,3 +309,108 @@
                   </div>
                 </div>
     </div>
+
+
+
+    	<!--Modal to User Profile-->
+	<div class="modal fade" id="WebPageSettingsTitleModal" tabindex="-1">
+           <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-header modal-header_form">
+                      <h5 class="modal-title">Header Title and Logo Settings</h5>
+					  <div class="btn-group" role="group" aria-label="Basic outlined example">		
+						<button type="button" class="btn btn-danger bi bi-x-circle navbar_icon" data-bs-dismiss="modal"></button>
+					  </div>
+                    </div>
+                    <div class="modal-body">
+
+					  <form class="g-3 needs-validation" id="WebPageSettingsTitleform" enctype="multipart/form-data" action="{{route('update_web_navigation_header_title_settings_post')}}"  method="post" >
+						@csrf
+						
+						<div class="row">
+						
+						<div class="col-sm-8">
+						
+							<div class="form-check mb-3">
+							  <input class="form-check-input" type="checkbox" id="default_web_settings" name="default_web_settings" onclick="default_web_settings_action()" title="Click to Enable Editing">
+							  <label class="form-check-label" for="default_web_settings">
+								Default
+							  </label>
+							</div>
+							 
+						</div>
+						
+						<div class="col-sm-8">
+							<div class="col-sm-12">
+							<div class="form-floating mb-3">
+								<input type="text" class="form-control" aria-describedby="basic-addon1" name="navigation_header_title" id="navigation_header_title" required placeholder="Header Title">
+								<label for="order_quantity">Header Title:</label>
+								<span class="valid-feedback" id="navigation_header_titleError"></span>
+							</div>
+							 
+						</div>
+						
+						
+						<div class="col-sm-12">
+							<div class="form-floating mb-3">
+								<input type="number" class="form-control" aria-describedby="basic-addon1" name="header_navigation_width" id="header_navigation_width" required step="1" max="70" placeholder="Logo Size Header">
+								<label for="order_quantity">Logo Size Header</label>
+								<span class="valid-feedback" id="header_navigation_widthError"></span>
+							</div>
+							 
+						</div>
+						
+						<div class="col-sm-12">
+							<div class="form-floating mb-3">
+								<input type="number" class="form-control" aria-describedby="basic-addon1" name="login_page_logo_width" id="login_page_logo_width" required step="1" max="100" placeholder="Logo Size Login Page">
+								<label for="order_quantity">Logo Size Login Page</label>
+								<span class="valid-feedback" id="order_quantityError"></span>
+							</div>
+							 
+						</div>
+						
+						<div class="row mb-3">
+							<div class="col-sm-12">
+							<label for="image_logo" class="form-label">Upload</label>
+							<input class="form-control" type="file" id="image_logo" name="image_logo" accept=".jpg, .jepg, .png">
+							</div>
+						
+							
+						</div>
+						
+						</div>
+						
+						<div class="col-sm-4">
+						
+								<div class="card">
+									<div class="card-body">
+									  <h5 class="card-title">Header Logo</h5>
+									</div>
+									<div class="img-holder card-img-bottom" align="center" id="image_logo_div"></div>
+								</div>
+								
+								<div class="card">
+									<div class="card-body">
+									  <h5 class="card-title">Login page Logo</h5>
+									</div>
+									<div class="img-holder_login card-img-bottom" align="center" id="image_logo_div_login"></div>
+								</div>
+						
+						</div>
+						
+						
+						
+						</div>
+						
+						</div>
+						
+                    <div class="modal-footer modal-footer_form">
+						
+						  <button type="submit" class="btn btn-success btn-sm bi bi-save-fill navbar_icon" id="header_title_settings_submit"> Submit</button>
+						  <!--<button type="reset" class="btn btn-primary btn-sm bi bi-backspace-fill navbar_icon" id="clear-user"> Clear Form</button>-->
+						  
+					</div>
+					</form><!-- End Multi Columns Form -->
+                  </div>
+                </div>
+             </div>

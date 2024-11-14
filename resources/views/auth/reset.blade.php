@@ -16,10 +16,10 @@
                   <div class="pt-4 pb-0">
 				  
 				  <div class="d-flex justify-content-center py-4">
-					<img src="{{asset('client_logo/logo-r.png')}}" alt="" style="width:120px;">
+					<img src="data:image/jpeg;base64,{{$WebPageSettingsdata->image_logo}}" alt="" style="width:{{$WebPageSettingsdata->login_page_logo_width}}px;">
 				  </div>
                   
-				  <h5 class="card-title text-center pb-0 fs-6" style="font-weight:bold !important; padding:0px !important; color: #00000;">Centralized Automated Meter Reading</h5>
+				  <h5 class="card-title text-center pb-0 fs-6" style="font-weight:bold !important; padding:0px !important">{{$WebPageSettingsdata->navigation_header_title}}</h5> 
                   </div>
 							
 									

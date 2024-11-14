@@ -16,6 +16,8 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 
+use App\Models\WebPageSettingsModel;
+
 class SAPReportController extends Controller
 {
 	
@@ -26,7 +28,7 @@ class SAPReportController extends Controller
 
 			$title = 'SAP Report';
 			$data = array();
-		
+			$WebPageSettingsdata = WebPageSettingsModel::first();
 			$data = User::where('user_id', '=', Session::get('loginID'))->first();			
 		
 			if($data->user_access=='ALL'){
@@ -50,7 +52,7 @@ class SAPReportController extends Controller
 	
 			}
 		
-			return view("amr.sap_report", compact('data','title','site_data'));
+			return view("amr.sap_report", compact('data','title','site_data', 'WebPageSettingsdata'));
 	
 		}
 	}  	

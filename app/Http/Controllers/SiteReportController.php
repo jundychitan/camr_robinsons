@@ -16,6 +16,8 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 
+use App\Models\WebPageSettingsModel;
+
 class SiteReportController extends Controller
 {
 	
@@ -26,7 +28,7 @@ class SiteReportController extends Controller
 
 			$title = 'Building Report';
 			$data = array();
-		
+			$WebPageSettingsdata = WebPageSettingsModel::first();
 			$data = User::where('user_id', '=', Session::get('loginID'))->first();			
 		
 			if($data->user_access=='ALL'){
@@ -51,7 +53,7 @@ class SiteReportController extends Controller
 	
 			}
 		
-			return view("amr.site_report", compact('data','title','site_data'));
+			return view("amr.site_report", compact('data','title','site_data', 'WebPageSettingsdata'));
 	
 		}		
 	

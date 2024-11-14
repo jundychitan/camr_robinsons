@@ -18,6 +18,8 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 
+use App\Models\WebPageSettingsModel;
+
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 
@@ -31,7 +33,7 @@ class ConsumptionReportController extends Controller
 
 			$title = 'Consumption Report';
 			$data = array();
-		
+			$WebPageSettingsdata = WebPageSettingsModel::first();
 			$data = User::where('user_id', '=', Session::get('loginID'))->first();			
 		
 			if($data->user_access=='ALL'){
@@ -55,7 +57,7 @@ class ConsumptionReportController extends Controller
 	
 			}
 		
-			return view("amr.meter_consumption_report", compact('data','title','site_data'));
+			return view("amr.meter_consumption_report", compact('data','title','site_data', 'WebPageSettingsdata'));
 	
 		}	
 	

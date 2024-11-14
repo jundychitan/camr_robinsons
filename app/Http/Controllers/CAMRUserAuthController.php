@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\WebPageSettingsModel;
 use Hash;
 use Session;
 use Validator;
@@ -12,12 +13,14 @@ class CAMRUserAuthController extends Controller
 {
     public function login(){
 		$title = 'Login';
-        return view("auth.login", compact('title'));
+		$WebPageSettingsdata = WebPageSettingsModel::first();
+        return view("auth.login", compact('title','WebPageSettingsdata'));
     }
 
     public function passwordreset(){
 		$title = 'Reset Password';
-        return view("auth.reset", compact('title'));
+		$WebPageSettingsdata = WebPageSettingsModel::first();
+        return view("auth.reset", compact('title','WebPageSettingsdata'));
     }
 	
     public function loginUser(Request $request){ 

@@ -16,7 +16,7 @@ use Session;
 use Validator;
 use DataTables;
 use Illuminate\Support\Facades\DB;
-// use Spatie\Activitylog\Models\Activity;
+use App\Models\WebPageSettingsModel;
 
 class CAMRSiteController extends Controller
 {
@@ -27,6 +27,7 @@ class CAMRSiteController extends Controller
 		if(Session::has('loginID')){
 			
 			$title = 'Site Management';
+			$WebPageSettingsdata = WebPageSettingsModel::first();
 			$data = array();
 			
 			$data = User::where('user_id', '=', Session::get('loginID'))->first();
@@ -38,7 +39,7 @@ class CAMRSiteController extends Controller
 			
 			$division_data = DivisionModel::orderby('division_name')->get();
 			$company_data = CompanyModel::orderby('company_name')->get();
-			return view("amr.site", compact('data', 'title', 'division_data', 'company_data'));
+			return view("amr.site", compact('data', 'title', 'division_data', 'company_data', 'WebPageSettingsdata'));
 		}
 	} 
 
@@ -381,7 +382,9 @@ class CAMRSiteController extends Controller
 					'meter_building_table.ip_gateway',
 					'meter_building_table.cut_off']);
 		
-		return view("amr.site_main_2",  compact('data','SiteData','title','status_tab','gateway_tab','meter_tab','meterlocation_tab','building_tab','status_aria_selected','gateway_aria_selected','meter_aria_selected','building_aria_selected','meterlocation_aria_selected','site_current_tab','configuration_file_data','offline_data'));
+		$WebPageSettingsdata = WebPageSettingsModel::first();
+
+		return view("amr.site_main_2",  compact('data','SiteData','title','status_tab','gateway_tab','meter_tab','meterlocation_tab','building_tab','status_aria_selected','gateway_aria_selected','meter_aria_selected','building_aria_selected','meterlocation_aria_selected','site_current_tab','configuration_file_data','offline_data', 'WebPageSettingsdata'));
 		
 		}
 		

@@ -10,6 +10,7 @@ use Session;
 use Validator;
 use DataTables;
 use Illuminate\Support\Facades\Storage;
+use App\Models\WebPageSettingsModel;
 
 class CompanyController extends Controller
 {
@@ -17,14 +18,16 @@ class CompanyController extends Controller
 	/*Load CompanyList Interface*/
 	public function Company(){
 		
-			$title = 'Company List';
-			$data = array();
 			if(Session::has('loginID')){
+
+				$title = 'Company List';
+				$data = array();
+				$WebPageSettingsdata = WebPageSettingsModel::first();
 				$data = User::where('user_id', '=', Session::get('loginID'))->first();
 			
+				return view("amr.company", compact('data','title', 'WebPageSettingsdata'));
+
 			}
-	
-			return view("amr.company", compact('data','title'));
 		
 	}   
 	

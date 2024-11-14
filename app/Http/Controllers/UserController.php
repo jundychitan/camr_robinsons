@@ -11,6 +11,7 @@ use Session;
 use Validator;
 use DataTables;
 use Illuminate\Support\Facades\Storage;
+use App\Models\WebPageSettingsModel;
 
 /*Email Function*/
 use App\Mail\ResetPassword;
@@ -22,14 +23,16 @@ class UserController extends Controller
 	/*Load UserList Interface*/
 	public function user(){
 		
+		if(Session::has('loginID')){
+			
 			$title = 'User List';
 			$data = array();
-			if(Session::has('loginID')){
-				$data = User::where('user_id', '=', Session::get('loginID'))->first();
+			$WebPageSettingsdata = WebPageSettingsModel::first();
+			$data = User::where('user_id', '=', Session::get('loginID'))->first();
 			
+			return view("amr.user", compact('data','title', 'WebPageSettingsdata'));
+
 			}
-	
-			return view("amr.user", compact('data','title'));
 		
 	}   
 	

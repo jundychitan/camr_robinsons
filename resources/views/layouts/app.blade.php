@@ -10,7 +10,7 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="{{('client_logo/logo.png')}}" rel="icon">
+  <link href="data:image/jpeg;base64,{{$WebPageSettingsdata->image_logo}}" rel="icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">

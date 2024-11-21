@@ -59,6 +59,7 @@ return new class extends Migration
         });
 
         DB::statement("ALTER TABLE `meter_data` CHANGE COLUMN `id` `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT FIRST;");
+        DB::statement("ALTER TABLE `meter_data` ADD INDEX `meter_data_index` (`meter_id`, `datetime`, `location`);");
 
     }
 

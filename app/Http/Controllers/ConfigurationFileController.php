@@ -10,6 +10,7 @@ use Session;
 use Validator;
 use DataTables;
 use Illuminate\Support\Facades\Storage;
+use App\Models\WebPageSettingsModel;
 
 class ConfigurationFileController extends Controller
 {
@@ -20,12 +21,15 @@ class ConfigurationFileController extends Controller
 			$title = 'Configuration File List';
 			$data = array();
 			if(Session::has('loginID')){
+
+				$WebPageSettingsdata = WebPageSettingsModel::first();
 				$data = User::where('user_id', '=', Session::get('loginID'))->first();
+				return view("amr.configuration_file", compact('data','title', 'WebPageSettingsdata'));
+		
 			
 			}
 	
-			return view("amr.configuration_file", compact('data','title'));
-		
+			
 	}   
 	
 	/*Fetch Site List using Datatable*/

@@ -165,7 +165,7 @@ class UserController extends Controller
 						if($request->user_email_address!=''){
 						
 							$title 			= 'Centralized Automated Meter Reading: User Account Created';
-							$body 			= 'Your User Account for Centralized Automated Meter Reading(OPUS) has been created successfully. Please use the provided Credentials below.';
+							$body 			= 'Your User Account for Centralized Automated Meter Reading has been created successfully. Please use the provided Credentials below.';
 							$name 			= $request->user_real_name;
 							$user_id 		= $last_transaction_id;
 							$user_name 		= $request->user_name;

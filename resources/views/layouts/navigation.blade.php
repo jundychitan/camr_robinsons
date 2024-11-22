@@ -344,7 +344,7 @@
 							<div class="col-sm-12">
 							<div class="form-floating mb-3">
 								<input type="text" class="form-control" aria-describedby="basic-addon1" name="navigation_header_title" id="navigation_header_title" required placeholder="Header Title">
-								<label for="order_quantity">Header Title:</label>
+								<label for="navigation_header_title">Header Title:</label>
 								<span class="valid-feedback" id="navigation_header_titleError"></span>
 							</div>
 							 
@@ -354,7 +354,7 @@
 						<div class="col-sm-12">
 							<div class="form-floating mb-3">
 								<input type="number" class="form-control" aria-describedby="basic-addon1" name="header_navigation_width" id="header_navigation_width" required step="1" max="70" placeholder="Logo Size Header">
-								<label for="order_quantity">Logo Size Header</label>
+								<label for="header_navigation_width">Logo Size Header</label>
 								<span class="valid-feedback" id="header_navigation_widthError"></span>
 							</div>
 							 
@@ -363,8 +363,8 @@
 						<div class="col-sm-12">
 							<div class="form-floating mb-3">
 								<input type="number" class="form-control" aria-describedby="basic-addon1" name="login_page_logo_width" id="login_page_logo_width" required step="1" max="100" placeholder="Logo Size Login Page">
-								<label for="order_quantity">Logo Size Login Page</label>
-								<span class="valid-feedback" id="order_quantityError"></span>
+								<label for="login_page_logo_width">Logo Size Login Page</label>
+								<span class="valid-feedback" id="login_page_logo_widthError"></span>
 							</div>
 							 
 						</div>

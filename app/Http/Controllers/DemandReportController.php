@@ -181,7 +181,8 @@ class DemandReportController extends Controller
 				
 				$COUNT_RESULTS = count($site_data);
 				
-				 if($kw_demand!=0){
+
+				 if($kw_demand>0){
 					
 					$result[] = array(
 					'hour' => $hourly,
@@ -356,7 +357,7 @@ class DemandReportController extends Controller
 				
 				$COUNT_RESULTS = count($site_data);
 				
-				 if($max_wh_total!=0){
+				 if($max_wh_total>0){
 					 
 					$result[] = array(
 					'hour' => $hourly,
@@ -528,7 +529,7 @@ class DemandReportController extends Controller
 				
 				$COUNT_RESULTS = count($site_data);
 				
-				 if($kw_demand!=0){
+				 if($kw_demand>0){
 					 
 					$result[] = array(
 					'hour' => $hourly,
@@ -800,7 +801,7 @@ class DemandReportController extends Controller
 
 				$COUNT_RESULTS = count($site_data);
 				
-				 if($kw_demand!=0){
+				 if($kw_demand>=0){
 				
 					$spreadSheet->getActiveSheet()
 						->setCellValue('A'.$no_excl, $n)

@@ -268,7 +268,7 @@ class SiteReportController extends Controller
 			
 				$KWh = ($sap_data_column['ending_reading'] - $sap_data_column['start_reading']) * $sap_data_column['meter_multiplier'];
 			
-			if( $KWh!=0 ){
+			if( $KWh>0 ){
 				
 				$spreadSheet->getActiveSheet()
 					->setCellValue('A'.$no_excl, $n)

@@ -36,11 +36,6 @@
   <link href="{{asset('style/custom_style_common.css')}}" rel="stylesheet">
   <link href="{{asset('style/custom_style_robinsons.css')}}" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: template - v2.3.1
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+
   
 @include('layouts.navigation')                                                                                                                                                                                     

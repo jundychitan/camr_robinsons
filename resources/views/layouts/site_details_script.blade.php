@@ -19,8 +19,6 @@
 			?>
    <script>
    
-   //$(window).resize(function(){location.reload();});
-   
                 document.addEventListener("DOMContentLoaded", () => {
                   new Chart(document.querySelector('#gateway'), {
                     type: 'pie',

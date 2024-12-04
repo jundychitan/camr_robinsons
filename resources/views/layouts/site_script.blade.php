@@ -61,7 +61,6 @@
 					stateSave: true,/*Remember Searches*/
 					scrollCollapse: true,
 					scrollY: '500px',
-					//scrollX: '100%',
 					ajax: "{{ route('UserSiteList') }}",
 					columns: [
 							{data: 'DT_RowIndex', name: 'DT_RowIndex' , orderable: false, searchable: false},       

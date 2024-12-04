@@ -4,8 +4,6 @@
    <script src="{{asset('datatables/responsive/3.0.2/js/responsive.dataTables.js')}}"></script>
    
 <script type="text/javascript">
-
-	// setMaxonEndDate();
 	
 	function setMaxonEndDate(){
 	
@@ -78,7 +76,6 @@
 			let end_date 			= $("input[name=end_date]").val();
 			let start_time 			= $("input[name=start_time]").val();
 			let end_time 			= $("input[name=end_time]").val();
-			//let valid_sap_meter_chk 	= document.getElementById("valid_sap_meter").checked;
 			
 			  $.ajax({
 				url: "/generate_site_report",
@@ -194,9 +191,6 @@
 						"emptyTable": "No Result Found",
 						"infoEmpty": "No entries to show"
 			    }, 
-				// processing: true,
-				//serverSide: true,
-				//stateSave: true,/*Remember Searches*/
 				responsive: false,
 				paging: true,
 				searching: true,
@@ -239,7 +233,6 @@
 			let end_date 			= $("input[name=end_date]").val();
 			let start_time 			= $("input[name=start_time]").val();
 			let end_time 			= $("input[name=end_time]").val();
-			//let valid_sap_meter_chk 	= document.getElementById("valid_sap_meter").checked;
 		 		  
 		var query = {
 			site_id:site_id,
@@ -248,7 +241,6 @@
 			start_time:start_time,
 			end_date:end_date,
 			end_time:end_time,
-			//valid_sap_meter:valid_sap_meter_chk,
 			_token: "{{ csrf_token() }}"
 		}
 

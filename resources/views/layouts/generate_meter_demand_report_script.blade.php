@@ -415,7 +415,6 @@
 				  console.log(response);
 				  if(response!='') {
 					  
-						//$('#meter_list option:last').after("<option label='All' value='All' data-id=''>");
 						var len = response.length;
 						for(var i=0; i<len; i++){
 							

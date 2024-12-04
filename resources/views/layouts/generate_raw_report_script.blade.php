@@ -149,11 +149,6 @@
 							var mac_addr = response[i].mac_addr;
 							var soft_rev = response[i].soft_rev;
 							
-							//current_consumption = _current_consumption.toFixed(3);
-							//var dateObject = new Date(current_reading_datetime);					
-							//var current_date = dateObject.toLocaleDateString('en-US');
-							//var current_time = dateObject.toLocaleTimeString('it-IT');
-							
 							var tr_str = "<tr>" +
 								"<td align='center'>" + (i+1) + "</td>" +
 								"<td align='center' nowrap>" + datetime + "</td>" +
@@ -394,7 +389,6 @@
 				  console.log(response);
 				  if(response!='') {
 					  
-						//$('#meter_list option:last').after("<option label='All' value='All' data-id=''>");
 						var len = response.length;
 						for(var i=0; i<len; i++){
 							
@@ -405,7 +399,6 @@
 							
 							meter_label =  (meter_name + ' | ' + customer_name);
 							
-							//$('#meter_list option:last').after("<option label='"+meter_label+"' data-id="+id+" data-description='"+customer_name+"' value="+meter_name+">");
 							$('#meter_list option:last').after("<option label='"+meter_label+"' data-id="+id+" data-description='"+customer_name+"' data-gateway='"+gateway_sn+"' value="+meter_name+">");
 
 						}			

@@ -80,7 +80,6 @@
 	  
 	let LoadGatewayPerBuildingList = $('#gatewaylist').DataTable( {
 				processing: true,
-				//serverSide: true,
 				stateSave: true,/*Remember Searches*/
 				scrollCollapse: true,
 				scrollY: '500px',
@@ -161,8 +160,7 @@
 				info: true,
 				data: [],
 				"columns": [
-					{data: 'DT_RowIndex', name: 'DT_RowIndex' , searchable: false, className: "text-right"},
-					/*{data: 'measuring_point'},*/           
+					{data: 'DT_RowIndex', name: 'DT_RowIndex' , searchable: false, className: "text-right"}, 
 					{data: 'meter_name', className: "text-center"},
 					{data: 'customer_name', className: "text-left"},
 					{data: 'last_log_update', className: "text-center"},

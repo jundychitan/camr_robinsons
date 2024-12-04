@@ -163,8 +163,6 @@
 					
 					$('#meter_default_nameError').hide();
 					$('#meter_default_nameError').text('');
-					//alert(meter_name_addressable_chk+" g g "+meter_default_name_val);
-					//document.getElementById('createmeterform').className = "g-2 needs-validation";
 					document.getElementById('meter_default_nameError').className = "valid-tooltip";
 					document.getElementById('meter_name').className = "form-control";
 			} else{ 
@@ -175,7 +173,6 @@
 					
 					$('#meter_default_nameError').hide();
 					$('#meter_default_nameError').text('');
-					//document.getElementById('createmeterform').className = "g-2 needs-validation";
 					document.getElementById('meter_default_nameError').className = "valid-tooltip";
 					document.getElementById('meter_name').className = "form-control";
 			}

@@ -113,9 +113,6 @@
 						"emptyTable": "No Result Found",
 						"infoEmpty": "No entries to show"
 			    }, 
-				// processing: true,
-				//serverSide: true,
-				//stateSave: true,/*Remember Searches*/
 				responsive: false,
 				paging: true,
 				searching: true,

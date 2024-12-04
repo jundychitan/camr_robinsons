@@ -3,7 +3,7 @@
    <script src="{{asset('datatables/responsive/3.0.2/js/dataTables.responsive.js')}}"></script>
    <script src="{{asset('datatables/responsive/3.0.2/js/responsive.dataTables.js')}}"></script>
    <script type="text/javascript">
-   // $(window).resize(function(){location.reload();});
+
 	<!--Load Table-->				
 	$(function () {
 				
@@ -14,7 +14,6 @@
 			stateSave: true,/*Remember Searches*/
 			scrollCollapse: true,
 			scrollY: '500px',
-			// scrollX: '100%',
 			ajax: {
 				url : "{{ route('UserList') }}",
 				method : 'POST',
@@ -31,9 +30,6 @@
 					{data: 'updated_at_dt_format', name: 'switch_status', orderable: true, searchable: false, className: "text-left"},
 					{data: 'action', name: 'action', orderable: false, searchable: false, className: "text-center"},
 			 ],
-			// columnDefs: [
-					 // { className: 'text-center', targets: [5, 6, 7] },
-			// ],
 			
 		});
 		  /*Add Options*/
@@ -573,9 +569,6 @@
 	}
 
 	let LoadSiteList = $('#UserSiteAccessList').DataTable( {
-				//processing: true,
-				//serverSide: true,
-				//stateSave: true,/*Remember Searches*/
 				responsive: true,
 				paging: true,
 				searching: true,
@@ -609,13 +602,8 @@
 			site_checklist_item.push($(this).val());
 			});
 			
-			//if(site_checklist_item!=''){
 				document.getElementById("update-user-site-access").disabled = false;
-			//}
-			//else{
-			//	document.getElementById("update-user-site-access").disabled = true;
-			//}
-			
+		
 	}
 	
 	$('body').on('click','#update-user-site-access',function(){

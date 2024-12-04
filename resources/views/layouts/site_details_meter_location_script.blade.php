@@ -29,10 +29,7 @@
 					{data: 'action', name: 'action', orderable: false, searchable: false, className: "text-center"},
 				]
 			} );
-	
-	
-	
-		//var table = $('#my-dt').DataTable().columns.adjust();
+
 		autoAdjustColumns_LocationList(LoadLocationList);
 
 		/*Adjust Table Column*/
@@ -191,13 +188,6 @@
 				success:function(response){
 				  console.log(response);
 				  if(response) {				
-						
-						/*Below items to Convert to Empty instead of NULL*/
-						// device_ip_range_value = response[0].device_ip_range || '';
-						// ip_netmask_value 		= response[0].ip_netmask || '';
-						// ip_network_value 		= response[0].ip_network || '';
-						// ip_gateway_value 		= response[0].ip_gateway || '';
-						/*Above items to Convert to Empty instead of NULL*/
 						
 					  if( response[0].location_code===location_code &&
 						  response[0].location_description===location_description

@@ -155,6 +155,7 @@ class ConsumptionReportController extends Controller
 				$KWh = (@$site_data[0]->max_wh_total - @$site_data[0]->min_wh_total) * $meter_multiplier;
 				
 				if( $KWh!=0 ){
+				//if( $KWh>=1 ){
 				 // if($COUNT_RESULTS != 0){
 					
 					$result[] = array(
@@ -274,6 +275,7 @@ class ConsumptionReportController extends Controller
 				$KWh = (@$site_data[0]->max_wh_total - @$site_data[0]->min_wh_total) * $meter_multiplier;
 				
 				if( $KWh!=0 ){
+				//if( $KWh>=1 ){
 					
 					$result[] = array(
 					'hour' => $hourly,
@@ -462,7 +464,8 @@ class ConsumptionReportController extends Controller
 				
 				$COUNT_RESULTS = count($site_data);
 				
-				 if( $KWh>=1 ){
+				 if( $KWh!=0 ){
+				//if( $KWh>=1 ){
 	
 					$spreadSheet->getActiveSheet()
 						->setCellValue('A'.$no_excl, $n)

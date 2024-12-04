@@ -274,7 +274,7 @@ class ConsumptionReportController extends Controller
 				
 				$KWh = (@$site_data[0]->max_wh_total - @$site_data[0]->min_wh_total) * $meter_multiplier;
 				
-				if( $KWh!=0 ){
+				if( $KWh>0 ){
 				//if( $KWh>=1 ){
 					
 					$result[] = array(

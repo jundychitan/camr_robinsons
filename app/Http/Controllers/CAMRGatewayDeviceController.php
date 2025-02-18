@@ -201,6 +201,14 @@ class CAMRGatewayDeviceController extends Controller
 	
 	/*********************************************************************/
 	/*Save Reading of Meters*/
+
+	public function http_post_server_A(Request $request){
+		
+	$server_time=date('Y-m-d H:i:s');
+	echo "OK, $server_time";	
+
+	}
+
 	public function http_post_server(Request $request){
 		
 	$save_to_meter_data = $request->save_to_meter_data;
@@ -258,110 +266,110 @@ class CAMRGatewayDeviceController extends Controller
 	$gateway_mac = $request->gateway_mac;
 	$soft_rev = $request->soft_rev;
 		
-	/*Save to Meter Data*/	
-	if($save_to_meter_data == 1){
+		/*Save to Meter Data*/	
+		if($save_to_meter_data == 1){
 			
-	$MeterData = new MeterDataModel();
+		$MeterData = new MeterDataModel();
 			
-	$MeterData->location 					= $location;
-	$MeterData->meter_id 					= $meter_id;
-	$MeterData->datetime 					= $datetime;
-	$MeterData->vrms_a 						= $vrms_a;
-	$MeterData->vrms_b 						= $vrms_b;
-	$MeterData->vrms_c 						= $vrms_c;
-	$MeterData->irms_a 						= $irms_a;
-	$MeterData->irms_b 						= $irms_b;
-	$MeterData->irms_c 						= $irms_c;
-	$MeterData->freq 						= $freq;
-	$MeterData->pf 							= $pf;
-	$MeterData->watt 						= $watt;
-	$MeterData->va 							= $va;
-	$MeterData->var 						= $var;
-	$MeterData->wh_del 						= $wh_del;
-	$MeterData->wh_rec 						= $wh_rec;
-	$MeterData->wh_net 						= $wh_net;
-	$MeterData->wh_total 					= $wh_total;
-	$MeterData->varh_neg 					= $varh_neg;
-	$MeterData->varh_pos 					= $varh_pos;
-	$MeterData->varh_net 					= $varh_net;
-	$MeterData->varh_total 					= $varh_total;
-	$MeterData->vah_total 					= $vah_total;
-	$MeterData->max_rec_kw_dmd 				= $max_rec_kw_dmd;
-	$MeterData->max_rec_kw_dmd_time 		= $max_rec_kw_dmd_time;
-	$MeterData->max_del_kw_dmd 				= $max_del_kw_dmd;
-	$MeterData->max_del_kw_dmd_time 		= $max_del_kw_dmd_time;
-	$MeterData->max_pos_kvar_dmd 			= $max_pos_kvar_dmd;
-	$MeterData->max_pos_kvar_dmd_time 		= $max_pos_kvar_dmd_time;
-	$MeterData->max_neg_kvar_dmd 			= $max_neg_kvar_dmd;
-	$MeterData->max_neg_kvar_dmd_time		= $max_neg_kvar_dmd_time;
-	$MeterData->v_ph_angle_a 				= @$v_ph_angle_a;
-	$MeterData->v_ph_angle_b 				= @$v_ph_angle_b;
-	$MeterData->v_ph_angle_c 				= @$v_ph_angle_c;
-	$MeterData->i_ph_angle_a 				= @$i_ph_angle_a;
-	$MeterData->i_ph_angle_b 				= @$i_ph_angle_b;
-	$MeterData->i_ph_angle_c 				= @$i_ph_angle_c;
-	$MeterData->gateway_mac 					= @$gateway_mac;
-	$MeterData->soft_rev 					= @$soft_rev;
-	$MeterData->relay_status 				= @$relay_status;
+		$MeterData->location 					= $location;
+		$MeterData->meter_id 					= $meter_id;
+		$MeterData->datetime 					= $datetime;
+		$MeterData->vrms_a 						= $vrms_a;
+		$MeterData->vrms_b 						= $vrms_b;
+		$MeterData->vrms_c 						= $vrms_c;
+		$MeterData->irms_a 						= $irms_a;
+		$MeterData->irms_b 						= $irms_b;
+		$MeterData->irms_c 						= $irms_c;
+		$MeterData->freq 						= $freq;
+		$MeterData->pf 							= $pf;
+		$MeterData->watt 						= $watt;
+		$MeterData->va 							= $va;
+		$MeterData->var 						= $var;
+		$MeterData->wh_del 						= $wh_del;
+		$MeterData->wh_rec 						= $wh_rec;
+		$MeterData->wh_net 						= $wh_net;
+		$MeterData->wh_total 					= $wh_total;
+		$MeterData->varh_neg 					= $varh_neg;
+		$MeterData->varh_pos 					= $varh_pos;
+		$MeterData->varh_net 					= $varh_net;
+		$MeterData->varh_total 					= $varh_total;
+		$MeterData->vah_total 					= $vah_total;
+		$MeterData->max_rec_kw_dmd 				= $max_rec_kw_dmd;
+		$MeterData->max_rec_kw_dmd_time 		= $max_rec_kw_dmd_time;
+		$MeterData->max_del_kw_dmd 				= $max_del_kw_dmd;
+		$MeterData->max_del_kw_dmd_time 		= $max_del_kw_dmd_time;
+		$MeterData->max_pos_kvar_dmd 			= $max_pos_kvar_dmd;
+		$MeterData->max_pos_kvar_dmd_time 		= $max_pos_kvar_dmd_time;
+		$MeterData->max_neg_kvar_dmd 			= $max_neg_kvar_dmd;
+		$MeterData->max_neg_kvar_dmd_time		= $max_neg_kvar_dmd_time;
+		$MeterData->v_ph_angle_a 				= @$v_ph_angle_a;
+		$MeterData->v_ph_angle_b 				= @$v_ph_angle_b;
+		$MeterData->v_ph_angle_c 				= @$v_ph_angle_c;
+		$MeterData->i_ph_angle_a 				= @$i_ph_angle_a;
+		$MeterData->i_ph_angle_b 				= @$i_ph_angle_b;
+		$MeterData->i_ph_angle_c 				= @$i_ph_angle_c;
+		$MeterData->gateway_mac 				= @$gateway_mac;
+		$MeterData->soft_rev 					= @$soft_rev;
+		$MeterData->relay_status 				= @$relay_status;
 			
-	$result = $MeterData->save();
+		$result = $MeterData->save();
 
-    $server_time=date('Y-m-d H:i:s');
-	echo "OK, $server_time";	
+		$server_time=date('Y-m-d H:i:s');
+		echo "OK, $server_time";	
 	
-	}
-	/*Save to Live Meter Data*/
-	else{
+		}
+		/*Save to Live Meter Data*/
+		else{
 		
-	$MeterData = new MeterDataModel();
-	$MeterData->makeHidden(['gateway_mac']);
+		$MeterData = new MeterDataModel();
+		$MeterData->makeHidden(['gateway_mac']);
 					
-	$MeterData->location 					= $location;
-	$MeterData->meter_id 					= $meter_id;
-	$MeterData->datetime 					= $datetime;
-	$MeterData->vrms_a 						= $vrms_a;
-	$MeterData->vrms_b 						= $vrms_b;
-	$MeterData->vrms_c 						= $vrms_c;
-	$MeterData->irms_a 						= $irms_a;
-	$MeterData->irms_b 						= $irms_b;
-	$MeterData->irms_c 						= $irms_c;
-	$MeterData->freq 						= $freq;
-	$MeterData->pf 							= $pf;
-	$MeterData->watt 						= $watt;
-	$MeterData->va 							= $va;
-	$MeterData->var 						= $var;
-	$MeterData->wh_del 						= $wh_del;
-	$MeterData->wh_rec 						= $wh_rec;
-	$MeterData->wh_net 						= $wh_net;
-	$MeterData->wh_total 					= $wh_total;
-	$MeterData->varh_neg 					= $varh_neg;
-	$MeterData->varh_pos 					= $varh_pos;
-	$MeterData->varh_net 					= $varh_net;
-	$MeterData->varh_total 					= $varh_total;
-	$MeterData->vah_total 					= $vah_total;
-	$MeterData->max_rec_kw_dmd 				= $max_rec_kw_dmd;
-	$MeterData->max_rec_kw_dmd_time 		= $max_rec_kw_dmd_time;
-	$MeterData->max_del_kw_dmd 				= $max_del_kw_dmd;
-	$MeterData->max_del_kw_dmd_time 		= $max_del_kw_dmd_time;
-	$MeterData->max_pos_kvar_dmd 			= $max_pos_kvar_dmd;
-	$MeterData->max_pos_kvar_dmd_time 		= $max_pos_kvar_dmd_time;
-	$MeterData->max_neg_kvar_dmd 			= $max_neg_kvar_dmd;
-	$MeterData->max_neg_kvar_dmd_time		= $max_neg_kvar_dmd_time;
-	$MeterData->v_ph_angle_a 				= $v_ph_angle_a;
-	$MeterData->v_ph_angle_b 				= $v_ph_angle_b;
-	$MeterData->v_ph_angle_c 				= $v_ph_angle_c;
-	$MeterData->i_ph_angle_a 				= $i_ph_angle_a;
-	$MeterData->i_ph_angle_b 				= $i_ph_angle_b;
-	$MeterData->i_ph_angle_c 				= $i_ph_angle_c;
-	$MeterData->soft_rev 					= $soft_rev;
-	$MeterData->relay_status 				= $relay_status;
+		$MeterData->location 					= $location;
+		$MeterData->meter_id 					= $meter_id;
+		$MeterData->datetime 					= $datetime;
+		$MeterData->vrms_a 						= $vrms_a;
+		$MeterData->vrms_b 						= $vrms_b;
+		$MeterData->vrms_c 						= $vrms_c;
+		$MeterData->irms_a 						= $irms_a;
+		$MeterData->irms_b 						= $irms_b;
+		$MeterData->irms_c 						= $irms_c;
+		$MeterData->freq 						= $freq;
+		$MeterData->pf 							= $pf;
+		$MeterData->watt 						= $watt;
+		$MeterData->va 							= $va;
+		$MeterData->var 						= $var;
+		$MeterData->wh_del 						= $wh_del;
+		$MeterData->wh_rec 						= $wh_rec;
+		$MeterData->wh_net 						= $wh_net;
+		$MeterData->wh_total 					= $wh_total;
+		$MeterData->varh_neg 					= $varh_neg;
+		$MeterData->varh_pos 					= $varh_pos;
+		$MeterData->varh_net 					= $varh_net;
+		$MeterData->varh_total 					= $varh_total;
+		$MeterData->vah_total 					= $vah_total;
+		$MeterData->max_rec_kw_dmd 				= $max_rec_kw_dmd;
+		$MeterData->max_rec_kw_dmd_time 		= $max_rec_kw_dmd_time;
+		$MeterData->max_del_kw_dmd 				= $max_del_kw_dmd;
+		$MeterData->max_del_kw_dmd_time 		= $max_del_kw_dmd_time;
+		$MeterData->max_pos_kvar_dmd 			= $max_pos_kvar_dmd;
+		$MeterData->max_pos_kvar_dmd_time 		= $max_pos_kvar_dmd_time;
+		$MeterData->max_neg_kvar_dmd 			= $max_neg_kvar_dmd;
+		$MeterData->max_neg_kvar_dmd_time		= $max_neg_kvar_dmd_time;
+		$MeterData->v_ph_angle_a 				= $v_ph_angle_a;
+		$MeterData->v_ph_angle_b 				= $v_ph_angle_b;
+		$MeterData->v_ph_angle_c 				= $v_ph_angle_c;
+		$MeterData->i_ph_angle_a 				= $i_ph_angle_a;
+		$MeterData->i_ph_angle_b 				= $i_ph_angle_b;
+		$MeterData->i_ph_angle_c 				= $i_ph_angle_c;
+		$MeterData->soft_rev 					= $soft_rev;
+		$MeterData->relay_status 				= $relay_status;
 			
-	$result = $MeterData->save();
+		$result = $MeterData->save();
 
-    $server_time=date('Y-m-d H:i:s');
-	echo "OK, $server_time";	
+		$server_time=date('Y-m-d H:i:s');
+		echo "OK, $server_time";	
 		
-	}
+		}
 	
    
 	

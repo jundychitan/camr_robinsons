@@ -31,6 +31,8 @@ use App\Http\Controllers\EmailController;
 use App\Http\Controllers\ConfigurationFileController;
 use App\Http\Controllers\CAMRWebpageController;
 
+use App\Http\Controllers\LoadProfileController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -257,7 +259,6 @@ Route::post('/update_user_post', [UserController::class,'update_user_post'])->na
 Route::post('/delete_user_confirmed', [UserController::class, 'delete_user_confirmed'])->name('delete_user_confirmed')->middleware('isLoggedIn');
 /*Update User Account*/
 Route::post('/user_account_post', [UserController::class,'user_account_post'])->name('user_account_post')->middleware('isLoggedIn');
-
  
 /*CHECK TIME*/
 Route::get('/check_time.php', [CAMRGatewayDeviceController::class,'check_time'])->name('check_time');
@@ -275,7 +276,28 @@ Route::get('/rtu/index.php/rtu/rtu_check_update/{mac}/rtu_remote_ssh', [CAMRGate
 Route::get('/rtu/index.php/rtu/rtu_check_update/{mac}/force_lp', [CAMRGatewayDeviceController::class,'force_load_profile_status'])->name('force_load_profile_status');
 Route::get('/rtu/index.php/rtu/rtu_check_update/{mac}/reset_force_lp', [CAMRGatewayDeviceController::class,'force_load_profile_status_reset'])->name('force_load_profile_status_reset');
 
-Route::post('/http_post_server', [CAMRGatewayDeviceController::class, 'http_post_server'])->name('http_post_server');
+//Route::redirectAction('/http_post_server.php', 'CAMRGatewayDeviceController@http_post_server_A');
+
+//Route::any('/http_post_server', [CAMRGatewayDeviceController::class, 'http_post_server'])->name('http_post_server');
+
+//Route::post('/http_post_server.php', function () {
+ //   return redirect('/home/dashboard');
+//});
+//LoadProfileController
+//Route::get('/site', [CAMRSiteController::class,'site'])->name('site')->middleware('isLoggedIn');
+Route::any('/lp/receive_file.php', [LoadProfileController::class,'LoadProfile'])->name('receive_file');
+
+
+//Route::redirect('/http_post_server.php', '/there');
+
+/*
+Route::match(array('GET', 'POST', 'PUT'), "/", array(
+    'uses' => 'LoadProfileController@index',
+    'as' => 'index'
+)); 
+*/
+
+//Route::controller('users', 'LoadProfileController');
 
 /*Configuation File Info*/
 Route::get('/configuration_file', [ConfigurationFileController::class,'ConfigurationFile'])->name('ConfigurationFile')->middleware('isLoggedIn');
@@ -290,6 +312,3 @@ Route::post('/delete_configuration_file_confirmed', [ConfigurationFileController
 Route::post('/web_settings_info', [CAMRWebpageController::class, 'web_settings_info'])->name('web_settings_info')->middleware('isLoggedIn');
 Route::post('/update_web_navigation_header_title_settings_post', [CAMRWebpageController::class, 'update_web_navigation_header_title_settings_post'])->name('update_web_navigation_header_title_settings_post')->middleware('isLoggedIn');
 Route::post('/update_logo', [CAMRWebpageController::class, 'update_logo'])->name('update_logo')->middleware('isLoggedIn');
-
-
-

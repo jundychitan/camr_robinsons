@@ -4,7 +4,6 @@
 	/*Reload Gateway Option for Add/Update Meter*/
   	function ReloadGatewayOption(){
 		
-		
 			/*For Add Meter*/
 			$("#rtu_sn_number option").remove();
 			$('<option style="display: none;"></option>').appendTo('#rtu_sn_number');
@@ -950,9 +949,7 @@
 					{data: 'config_file'},
 					{data: 'meter_default_name'},
 					{data: 'meter_remarks'},
-					
 				]
-
 			} );
 					
 		//var table = $('#my-dt').DataTable().columns.adjust();
@@ -1025,16 +1022,30 @@
 			 let gatewayID = $(this).data('id');
 			
 			   $.ajax({
-				 url: "{{ route('getMetersPerGateway') }}",
-				 type:"GET",
+				 url: "/gateway_info",
+				 type:"POST",
 				 data:{
 				   gatewayID:gatewayID,
 				   _token: "{{ csrf_token() }}"
 				 }
-			  }).done(function (result) {
+			  }).done(function (response) {
 					
-					 document.getElementById("import_gateway_idx").value = gatewayID;
-					 $('#UploadGatewayMeterModal').modal('toggle');		
+						/*Set Details*/
+						$('#view_serial_number_upload').text(response.gateway_sn);
+						$('#view_ip_address_upload').text(response.gateway_mac);
+						$('#view_gateway_macess_upload').text(response.gateway_sn);
+					
+						$('#view_connection_type_upload').text(response.connection_type);
+						$('#view_location_code_upload').text(response.location_code);
+						$('#view_location_description_upload').text(response.location_description);
+						$('#view_idf_name_upload').text(response.idf_number);
+					
+						$('#view_idf_switch_upload').text(response.switch_name);
+						$('#view_idf_port_upload').text(response.idf_port);
+						$('#view_gateway_description_upload').text(response.gateway_description);
+
+						document.getElementById("import_gateway_idx").value = gatewayID;
+						$('#UploadGatewayMeterModal').modal('toggle');		
 					
              })	
 	 });
@@ -1045,7 +1056,7 @@ var clear_timer;
   $('#sample_form').on('submit', function(event){
    $('#message').html('');
    event.preventDefault();
-   $.ajax({//import_meters
+   $.ajax({
     url:"{{ route('import_meters') }}",
     method:"POST",
     data: new FormData(this),
@@ -1066,58 +1077,95 @@ var clear_timer;
 					
 					/*Enable Submit Button*/
 					document.getElementById("import").disabled = false;
-					//$('#import').attr('disabled','disabled');
-					//$('#import').val('Importing');
 					/*Hide Status*/
 					$('#loading_data').hide();
 					
 	},
-	/*beforeSend:function(){
-     $('#import').attr('disabled','disabled');
-     $('#import').val('Importing');
-    },*/
     success:function(data)
     {
      if(data.success)
      {
-		//alert(data.total_line);
-		 
-      //$('#total_data').text(data.total_line);
 
-     // $('#message').html('<div class="alert alert-success">CSV File Uploaded</div>');
-	  
-	 // $('#total_data').text(data.total_line);
+			meterlistLoadPerGateway_Upload.clear().draw();
+			meterlistLoadPerGateway_Upload.rows.add(data.result_csv_import).draw();	
 
-     // start_import();
-	 
-		/*Display Data*/
-	  /*Enable Submit Button*/
-					document.getElementById("import").disabled = false;
-					//$('#import').attr('disabled','disabled');
-					//$('#import').val('Importing');
-					/*Hide Status*/
-					$('#loading_data').hide();
+			/*Display Data*/
+			/*Enable Submit Button*/
+			document.getElementById("import").disabled = false;
+			
+			/*Hide Status*/
+			$('#loading_data').hide();
+
+			$('#csv_fileError').html("");
+			document.getElementById('csv_fileError').className = "valid-feedback";
+			document.getElementById('csv_file').className = "form-control is-valid";
+
+			$('.success_modal_bg').html(data.success);
+			$('#SuccessModal').modal('toggle');
+			//alert('0');
+
      }
      if(data.error)
-     {
-		  //$('#message').html('<div class="alert alert-danger">'+data.error+'</div>');
-		  //$('#import').attr('disabled',false);
-		  //$('#import').val('Import');
-		  
+     { 
+
+			$('#InvalidModal').modal('toggle');
+			$('#csv_fileError').html("<b>"+ data.error +"</b>");
+			document.getElementById('csv_fileError').className = "invalid-feedback";
+			document.getElementById('csv_file').className = "form-control is-invalid";
+			//alert('1');
+
      }
     },
 	error: function(error) {
 	console.log(error);	
 	
-			$('#InvalidModal').modal('toggle');	
-			$('#csv_fileError').html("<b>"+ error.responseJSON.errors.csv_file +"</b>");
+			$('#InvalidModal').modal('toggle');
+			$('#csv_fileError').html("<b>"+ 'Please check the Encoded Data on the Upload File.' +"</b>");
 			document.getElementById('csv_fileError').className = "invalid-feedback";
 			document.getElementById('csv_file').className = "form-control is-invalid";
+			//alert('2');
 	}
-	
 	
    })
   });
+
+  			/*Load Meter List Per Gateway*/	
+			let meterlistLoadPerGateway_Upload = $('#meterlistLoadPerGateway_upload').DataTable( {
+				processing: true,
+				//serverSide: true,
+				//stateSave: true,/*Remember Searches*/
+				responsive: true,
+				scrollCollapse: true,
+				scrollY: '500px',
+				//scrollX: '100%',
+				paging: true,
+				searching: true,
+				info: true,
+				data: [],
+				"columns": [
+					{data: null, render: function (data, type, row, meta) { return meta.row + meta.settings._iDisplayStart + 1; }},
+					{data: 'meter_name', className: "text-center"},
+					{data: 'tenant_name'},
+					{data: 'multiplier'},
+					{data: 'meter_status'},		
+					{data: 'location_code'},
+					{data: 'location_description'},
+					{data: 'meter_role'},
+					{data: 'configuration_file'},
+					{data: 'meter_default_name'}
+				]
+			} );
+					
+		autoAdjustColumns_meterlistLoadPerGateway_upload(meterlistLoadPerGateway_Upload);
+
+		/*Adjust Table Column*/
+		function autoAdjustColumns_meterlistLoadPerGateway_upload(table) {
+			var container = table.table().container();
+			var resizeObserver = new ResizeObserver(function () {
+				table.columns.adjust();
+			});
+			resizeObserver.observe(container);
+		}	
 	
 	function ResetFormAddGateway(){
 		
@@ -1136,5 +1184,4 @@ var clear_timer;
 		document.getElementById('gateway_ip').className = "form-control";
 		
 	}	
-	
 </script>

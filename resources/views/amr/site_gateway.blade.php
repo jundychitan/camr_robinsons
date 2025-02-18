@@ -351,7 +351,6 @@
 													<th title="Role : Tenant Meter/Tenant, Spare Meter, CUSA or Check Meter" nowrap class="none">Meter Role: </th>
 													<th title="" class="all">Configuration File</th>
 													<th title="" class="all">Address</th>
-													<th title="" class="none">Remarks: </th>
 												</tr>
 											</thead>				
 											
@@ -479,6 +478,25 @@
         </div>
     </div>
 	
+	<!-- Enabel/Disable CSV Update -->
+    <div class="modal fade" id="CSVStatus" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header header_modal_bg">
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+ 					<div class="btn-sm btn-warning btn-circle bi bi-exclamation-circle btn_icon_modal"></div>
+                </div>
+                <div class="modal-body warning_modal_bg" id="modal-body">
+				CSV Update Enabled!
+				</div>
+                <div class="modal-footer footer_modal_bg">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal"><i class="bi bi-x-circle navbar_icon"></i> Close</button>
+					     
+                </div>
+            </div>
+        </div>
+    </div>
+
 	<!-- Upload Gateway Meter List -->
 	<div class="modal fade" id="UploadGatewayMeterModal" tabindex="-1">
                 <div class="modal-dialog modal-xl">
@@ -493,20 +511,20 @@
                     <div class="modal-body">
 					<div class="row">
 
-					<div class="col-lg-4">
+					<div class="col-lg-3">
 							
 							<ol class="list-group list-group-numbered">
 									<li class="list-group-item d-flex justify-content-between align-items-start">
 									  <div class="ms-2 me-auto">
 										<div class="fw-bold">Serial Number</div>
-										<div id="view_serial_number"></div>
+										<div id="view_serial_number_upload"></div>
 									  </div>
 									  
 									</li>
 									<li class="list-group-item d-flex justify-content-between align-items-start">
 									  <div class="ms-2 me-auto">
 										<div class="fw-bold">IP Address</div>
-										<div id="view_ip_address"></div>
+										<div id="view_ip_address_upload"></div>
 									  </div>
 									  
 									</li>
@@ -514,27 +532,27 @@
 									<li class="list-group-item d-flex justify-content-between align-items-start">
 									  <div class="ms-2 me-auto">
 										<div class="fw-bold">MAC Address</div>
-										<div id="view_mac_address"></div>
+										<div id="view_mac_address_upload"></div>
 									  </div>
 									  
 									<li class="list-group-item d-flex justify-content-between align-items-start">
 									  <div class="ms-2 me-auto">
 										<div class="fw-bold">Connection Type</div>
-										<div id="view_connection_type"></div>
+										<div id="view_connection_type_upload"></div>
 									  </div>
 									  
 									</li>
 									<li class="list-group-item d-flex justify-content-between align-items-start">
 									  <div class="ms-2 me-auto">
 										<div class="fw-bold">Location</div>
-										<div id="view_physical_location"></div>
+										<div id="view_physical_location_upload"></div>
 									  </div>
 									  
 									</li>
 									<li class="list-group-item d-flex justify-content-between align-items-start">
 									  <div class="ms-2 me-auto">
 										<div class="fw-bold">IDF Name</div>
-										<div id="view_idf_name"></div>
+										<div id="view_idf_name_upload"></div>
 									  </div>
 									  
 									</li>
@@ -542,7 +560,7 @@
 									<li class="list-group-item d-flex justify-content-between align-items-start">
 									  <div class="ms-2 me-auto">
 										<div class="fw-bold">Switch</div>
-										<div id="view_idf_switch"></div>
+										<div id="view_idf_switch_upload"></div>
 									  </div>
 									  
 									</li>
@@ -550,7 +568,7 @@
 									<li class="list-group-item d-flex justify-content-between align-items-start">
 									  <div class="ms-2 me-auto">
 										<div class="fw-bold">Port</div>
-										<div id="view_idf_port"></div>
+										<div id="view_idf_port_upload"></div>
 									  </div>
 									  
 									</li>
@@ -558,20 +576,114 @@
 									<li class="list-group-item d-flex justify-content-between align-items-start">
 									  <div class="ms-2 me-auto">
 										<div class="fw-bold">Description</div>
-										<div id="view_gateway_description"></div>
+										<div id="view_gateway_description_upload"></div>
 									  </div>
 									  
 									</li>
 									
 								  </ol>
 					</div>
-					<div class="col-lg-8">
+					<div class="col-lg-9">
 					
 							<div class="card-0">
 							<div class="card-body">  
 									
 									<span id="message"></span>
-									   <form id="sample_form" method="POST" enctype="multipart/form-data" class="form-horizontal">
+									   
+
+									   <b>Use the Following format Below to Upload the Meter List:</b><br>
+									
+										<table width="100%" class="table table-bordered">
+										
+											<tr>
+												<th>#</th>
+												<th align="center">Column</th>
+												<th>Value</th>
+												<th>Description</th>
+											</tr>
+										
+											<tr>
+												<td>1.</td>
+												<td align="center">A</td>
+												<td>Location Code</td>
+												<td>Use the Assigned code for each Location of the meter.</td>
+											</tr>
+
+											<tr>
+												<td>2.</td>
+												<td align="center">B</td>
+												<td>Meter Name</td>
+												<td>The Serial Number or Meter Description.</td>
+											</tr>
+
+											<tr>
+												<td>3.</td>
+												<td align="center">C</td>
+												<td nowrap>Tenant/Meter Tagging</td>
+												<td>The Tenant Description/Tagging.</td>
+											</tr>
+
+											<tr>
+												<td>4.</td>
+												<td align="center">D</td>
+												<td>Meter Brand</td>
+												<td>Ex. EDMI, CH Asia Meter</td>
+											</tr>
+
+											<tr>
+												<td>5.</td>
+												<td align="center">E</td>
+												<td>Meter Type</td>
+												<td>Single/Three Phase</td>
+											</tr>
+
+											<tr>
+												<td>6.</td>
+												<td align="center">F</td>
+												<td>Status</td>
+												<td>Active or Inactive</td>
+											</tr>
+
+											<tr>
+												<td>7.</td>
+												<td align="center">G</td>
+												<td nowrap>Configuration File</td>
+												<td>The Assigned configuration file for the meter.</td>
+											</tr>
+
+											<tr>
+												<td>8.</td>
+												<td align="center">H</td>
+												<td>Alternate Address </td>
+												<td>If the Meter is not addressable through the Serial Number, include the Alternate Address otherwise leave it blank. Example of meters that are not addressable using its Serial Number is the CH Asia Meter. Please refer to the 
+									   User's Manual.</td>
+											</tr>
+
+											<tr>
+												<td>9.</td>
+												<td align="center">I</td>
+												<td>Meter Role</td>
+												<td>It can be Tenant Meter, CUSA, Check Meter or a Spare Meter.</td>
+											</tr>
+
+											<tr>
+												<td>10.</td>
+												<td align="center">J</td>
+												<td>Multiplier</td>
+												<td>The CT ratio/Multiplier.</td>
+											</tr>
+
+											<tr>
+												<td>11.</td>
+												<td align="center">K</td>
+												<td>Remarks</td>
+												<td>An optional Description of the Meter.</td>
+											</tr>
+
+										</table>
+										<b>Save the File in a Comma Delimited Format(CSV).</b>
+										
+										<form id="sample_form" method="POST" enctype="multipart/form-data" class="form-horizontal">
 									 	@csrf				   
 					
 										<div class="row mb-2">
@@ -586,16 +698,39 @@
 										   </div>
 										<!-- <span class="valid-feedback" id="csv_fileError"></span>-->
 										</div>
-										
+										<div id="loading_data" style="display:none;">
+										<div class="spinner-border text-success" role="status">
+											<span class="visually-hidden">Please wait...</span>
+										</div>
+										</div>
 									   </form>
-									   
-									<div id="loading_data" style="display:none;">
-									<div class="spinner-border text-success" role="status">
-										<span class="visually-hidden">Please wait...</span>
+
+									   <div class="table-responsive">
+										<table class="table table-bordered dataTable" id="meterlistLoadPerGateway_upload" width="100%" cellspacing="0">
+											<thead>
+												<tr>
+													<th class="all">#</th>
+													<th title="Meter Serial Number" nowrap class="all">Meter Description</th>
+													<th title="Meter Tagging/Tenant/Client Name" nowrap class="none">Name/Tagging: </th>													
+													<th title="Meter Multiplier" nowrap class="none">Multiplier: </th>
+													<th title="Active/Inactive" class="none">Status: </th>
+													<th title="The Meter Physical Location" class="none">Location Code: </th>
+													<th title="The Meter Physical Location" class="none">Location Description: </th>
+													<th title="Role : Tenant Meter/Tenant, Spare Meter, CUSA or Check Meter" nowrap class="none">Meter Role: </th>
+													<th title="" class="all">Configuration File</th>
+													<th title="" class="all">Address</th>
+												</tr>
+											</thead>				
+											
+											<tbody>
+												
+											</tbody>
+
+											
+										</table>
+										
 									</div>
-									</div>
-							
-							
+								
 							</div>
 							</div>
 

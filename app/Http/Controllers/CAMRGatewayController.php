@@ -14,6 +14,8 @@ use Validator;
 use DataTables;
 use Illuminate\Support\Facades\DB;
 
+
+
 class CAMRGatewayController extends Controller
 {
 
@@ -269,7 +271,8 @@ class CAMRGatewayController extends Controller
 								<label class="form-check-label" title="Force to Download Load Profile">LP</label>
 							</div>
 						  </li>
-					*/									
+					*/						
+					
 					$updateBtn = '
 					<nav class="d-flex justify-content-center gateway_config_s2">
 						<ol class="breadcrumb">
@@ -298,16 +301,14 @@ class CAMRGatewayController extends Controller
                 })				
 				
                 ->addColumn('action', function($row){
-                    
 					$last_log_update = $row->last_log_update;
-					
 						/*FROM LOGS*/
 						$_date_format = strtotime($last_log_update);
 						$date_format = date('Y-m-d H:i:s',$_date_format);		
 										
 					$actionBtn = '
 					<div align="center" class="action_table_menu_gateway">
-					<!--<a href="#" data-id="'.$row->rtu_id.'" class="btn-info btn-circle btn-sm bi bi-upload btn_icon_table btn_icon_table_view" id="UploadGatewayMeter"></a>-->
+					<a href="#" data-id="'.$row->rtu_id.'" class="btn-info btn-circle btn-sm bi bi-upload btn_icon_table btn_icon_table_view" id="UploadGatewayMeter"></a>
 					<a href="#" data-id="'.$row->rtu_id.'" class="btn-info btn-circle btn-sm bi bi-eye-fill btn_icon_table btn_icon_table_view" id="ViewGateway"></a>
 					<a href="#" data-id="'.$row->rtu_id.'" class="btn-warning btn-circle btn-sm bi bi-pencil-fill btn_icon_table btn_icon_table_edit" id="EditGateway"></a>
 					<a href="#" data-id="'.$row->rtu_id.'" class="btn-danger btn-circle btn-sm bi-trash3-fill btn_icon_table btn_icon_table_delete" id="DeleteGateway"></a>
@@ -356,7 +357,7 @@ class CAMRGatewayController extends Controller
 		
     }
 	
-		/*Fetch Gateway List using Datatable*/
+	/*Fetch Gateway List using Datatable*/
 	public function ReloadGatewayOption(Request $request)
     {
 
@@ -616,18 +617,6 @@ class CAMRGatewayController extends Controller
 
 //https://www.webslesson.info/2019/11/csv-import-using-ajax-progress-bar-in-php.html
 	public function import_meters(Request $request){
-
-		   // $request->validate([
-				// 'csv_file'			=>[
-                    // 'required',
-                    // 'mimetypes:text/plain,text/csv',
-					// 'max:10048'	
-                // ],
-				
-           // ],[
-				// 'csv_file.required' 				=> 'CSV file is Required',
-				
-           // ]);
 		   
 $request->validate([
 				'csv_file'	=> 'required|mimes:csv,txt'
@@ -636,10 +625,7 @@ $request->validate([
 				'csv_file.required' 				=> 'CSV file is Required',
 				
            ]);
-           //if(!$validator->passes()){
-          //     return response()->json(['error'=>1,'error'=>$validator->errors()->toArray()]);
-         //  }else{
-			 
+
 			   if ($request->hasFile('csv_file')) {
 				   
 					   $path = 'files/';
@@ -671,8 +657,13 @@ $request->validate([
 
 							$cols = preg_split("/[\t,]/", $lines_row);
 
-							if(count($cols)<10){
+							if(count($cols)<=10){
+
 									/*show errors*/
+									return response()->json(array('error' => "CSV File Error, please check the Content/Column Count.",
+										'total_line' => 0,
+											'result_csv_import' => 0), 200);
+
 							}
 							else{
 								
@@ -684,7 +675,7 @@ $request->validate([
 								$meter_type			 		= @$cols[4];
 								$meter_status		 		= @$cols[5];
 								
-								if($meter_status=='read'||$meter_status=='ACTIVE'||$meter_status=='READ'){
+								if($meter_status=='read'||$meter_status=='ACTIVE'||$meter_status=='Active'||$meter_status=='READ'||$meter_status=='Read'){
 									$_meter_status = 'ACTIVE';
 								}else{
 									$_meter_status = 'INACTIVE';
@@ -703,52 +694,106 @@ $request->validate([
 								
 								$meter_role			 		= @$cols[8];
 								$multiplier			 		= @$cols[9];
-								$meter_remarks		 		= @$cols[10];//k
+								$meter_remarks		 		= @$cols[10];
 								
 								/*Get Location Info*/
-								$raw_query_location_info = "SELECT location_id FROM meter_location_table WHERE location_code = ?";			
+								$raw_query_location_info = "SELECT location_id,location_description FROM meter_location_table WHERE location_code = ?";			
 								$location_info  = DB::select("$raw_query_location_info", [$location_code]);
 								$location_id	= @$location_info[0]->location_id;
+								$location_description	= @$location_info[0]->location_description;
 								
 								/*Get Meter Config Info*/
 								$raw_query_configuration_info = "SELECT config_id FROM meter_configuration_file WHERE config_file = ?";			
 								$configfile_info  = DB::select("$raw_query_configuration_info", [$configuration_file]);
 								$config_id	= @$configfile_info[0]->config_id;
 								
-								$meter = new MeterModel();
-								$meter->makeHidden(['meter_load_profile', 'last_log_update', 'last_wh_total', 'soft_rev', 'meter_reading']);
-								
-								$meter->site_idx 						= $import_gateway_site_idx;		
-								$meter->site_code 						= $import_gateway_site_code;	
+								/*Check Meter if Exist*/
+								$MeterCountEncoded = MeterModel::where('meter_name', '=', $meter_name)
+												->where('site_idx', '=', $import_gateway_site_idx)
+												->get();
+								$MeterCount = $MeterCountEncoded->count();
 
-								$meter->rtu_idx 						= $import_gateway_idx;	
-								
-								$meter->meter_name 						= $meter_name;
-								$meter->meter_name_addressable 			= $meter_name_addressable;
-								$meter->meter_default_name 				= $meter_default_name;
-								$meter->customer_name 					= $tenant_name;
-								$meter->config_idx		 				= $config_id;
-								$meter->meter_type 						= $meter_type;
-								$meter->meter_brand 					= $meter_brand;
-								$meter->meter_multiplier 				= $multiplier;
-								$meter->meter_role 						= $meter_role;
-								$meter->location_idx 					= $location_id;
-								$meter->rtu_idx			 				= $import_gateway_idx;
-								$meter->meter_status 					= $_meter_status;
-								$meter->meter_remarks 					= $meter_remarks;	
-								$meter->created_by_user_idx 			= Session::get('loginID');
-								
-								$result = $meter->save();
+								if($MeterCount>=1){
+									
+									/*Update*/
+									/*Query by Meter Name and Site ID*/
+									$meter = new MeterModel();
+									$meter = MeterModel::where('meter_name', '=', $meter_name)
+											->where('site_idx', '=', $import_gateway_site_idx)
+											->update([
+												'site_idx' 					=> $import_gateway_site_idx,
+												'site_code' 				=> $import_gateway_site_code,
+												'rtu_idx'					=> $import_gateway_idx,
+												'meter_name' 				=> $meter_name,
+												'meter_name_addressable'	=> $meter_name_addressable,
+												'meter_default_name' 		=> $meter_default_name,
+												'customer_name' 			=> $tenant_name,
+												'config_idx'		 		=> $config_id,
+												'meter_type' 				=> $meter_type,
+												'meter_brand' 				=> $meter_brand,
+												'meter_multiplier' 			=> $multiplier,
+												'meter_role' 				=> $meter_role,
+												'location_idx' 				=> $location_id,
+												'rtu_idx'			 		=> $import_gateway_idx,
+												'meter_status' 				=> $_meter_status,
+												'meter_remarks' 			=> $meter_remarks,
+												'modified_by_user_idx' 		=> Session::get('loginID')
+											]);
+
+									$import_mode = 'Existing Meter';
+
+								}else{
+
+									/*Create*/
+									$meter = new MeterModel();
+									$meter->makeHidden(['meter_load_profile', 'last_log_update', 'last_wh_total', 'soft_rev', 'meter_reading']);
+									$meter->site_idx 						= $import_gateway_site_idx;
+									$meter->site_code 						= $import_gateway_site_code;
+									$meter->rtu_idx 						= $import_gateway_idx;
+									$meter->meter_name 						= $meter_name;
+									$meter->meter_name_addressable 			= $meter_name_addressable;
+									$meter->meter_default_name 				= $meter_default_name;
+									$meter->customer_name 					= $tenant_name;
+									$meter->config_idx		 				= $config_id;
+									$meter->meter_type 						= $meter_type;
+									$meter->meter_brand 					= $meter_brand;
+									$meter->meter_multiplier 				= $multiplier;
+									$meter->meter_role 						= $meter_role;
+									$meter->location_idx 					= $location_id;
+									$meter->rtu_idx			 				= $import_gateway_idx;
+									$meter->meter_status 					= $_meter_status;
+									$meter->meter_remarks 					= $meter_remarks;
+									$meter->created_by_user_idx 			= Session::get('loginID');
+									$meter->modified_by_user_idx			= 0;
+
+									$result = $meter->save();
+
+									$import_mode = 'New Meter';
+
+								}
+
+								$result_csv_import[] = array(
+								'meter_name'				=> $meter_name,
+								'configuration_file'		=> $configuration_file,
+								'meter_default_name'		=> $meter_default_name,
+								'tenant_name'				=> $tenant_name,
+								'meter_role'				=> $meter_role,
+								'meter_status'				=> $_meter_status,
+								'multiplier'				=> $multiplier,
+								'location_code'				=> $location_code,
+								'location_description'		=> $location_description,
+								'import_mode'				=> $import_mode
+								);
 								
 							}
-							
 						}
-						
-						return response()->json(array('success' => "CSV File Successfully Imported!", 'total_line' => @$total_line), 200);
+
+						return response()->json(array('success' => "CSV File Successfully Imported!",
+							'total_line' => @$total_line,
+								'result_csv_import' => @$result_csv_import), 200);
 
                }
            }
-   
 
 	/*Enable CSV Update for Gateway*/
 	public function enablecsvUpdate(Request $request){
@@ -764,6 +809,7 @@ $request->validate([
 			else{
 				return response()->json(['success'=>'Error on Enabling CSV Update']);
 			}
+
 	}
 
 	/*Disable CSV Update for Gateway*/

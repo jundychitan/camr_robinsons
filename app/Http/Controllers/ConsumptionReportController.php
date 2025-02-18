@@ -136,10 +136,8 @@ class ConsumptionReportController extends Controller
 					a.`wh_total` AS min_wh_total,
 					b.`datetime` AS max_datetime,
 					b.`wh_total` AS max_wh_total
-					
 					FROM meter_data a
 					USE INDEX(meter_data_index)
-					
 					INNER JOIN meter_data b
 					WHERE 
 					a.meter_id = ? AND 

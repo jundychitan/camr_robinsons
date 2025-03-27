@@ -21,3 +21,4 @@ yarn-error.log
 /.zed
 /.vs/camr_robinsons/v17
 /.vs
+/public/connection.php

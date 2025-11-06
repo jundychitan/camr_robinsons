@@ -1,10 +1,5 @@
 <?php
 
-/*
-DB_DATABASE=meter_reading_robinsons
-DB_USERNAME=amropus_dbuser
-DB_PASSWORD=P@$ZwoRd2k240710_@dec
-*/
 				date_default_timezone_set('Asia/Manila');	
 				$servername = "localhost";
 				$username = "dbuser";
@@ -17,6 +12,5 @@ DB_PASSWORD=P@$ZwoRd2k240710_@dec
 				if (!$conn) {
 					die("Connection failed: " . mysqli_connect_error());
 				}
-
 
 ?> 

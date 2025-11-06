@@ -785,6 +785,7 @@
 	  });
 
 	<!--SSH Enable-->
+	/*
  	$('body').on('click','.enableSSH',function(){
 			
 			event.preventDefault();
@@ -812,8 +813,9 @@
 			   });
 			   
 	  }); 
-	  
+	 */ 
 	<!--SSH Disable-->
+	/*
  	$('body').on('click','.disableSSH',function(){
 			
 			event.preventDefault();
@@ -841,8 +843,9 @@
 			   });
 			   
 	  }); 
-	
+	*/
 	<!--Force Load Profile Enable-->
+	/*
  	$('body').on('click','.enableLP',function(){
 			
 			event.preventDefault();
@@ -869,9 +872,11 @@
 				}
 			   });
 			   
-	  }); 
+	  });
+	*/
 	  
 	<!--Force Load Profile Disable-->
+	/*
 	$('body').on('click','.disableLP',function(){
 			
 			event.preventDefault();
@@ -899,8 +904,8 @@
 			   });
 			   
 	  }); 
-	
-	<!--Select Gateway For Update-->
+	*/
+	<!--View Enrolled Meters on Gateway -->
 	$('body').on('click','#ViewGateway',function(){
 		
 			event.preventDefault();

@@ -31,8 +31,6 @@ use App\Http\Controllers\EmailController;
 use App\Http\Controllers\ConfigurationFileController;
 use App\Http\Controllers\CAMRWebpageController;
 
-use App\Http\Controllers\LoadProfileController;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -275,29 +273,6 @@ Route::get('/rtu/index.php/rtu/rtu_check_update/{mac}/rtu_remote_ssh', [CAMRGate
 /*Force Load Profile*/
 Route::get('/rtu/index.php/rtu/rtu_check_update/{mac}/force_lp', [CAMRGatewayDeviceController::class,'force_load_profile_status'])->name('force_load_profile_status');
 Route::get('/rtu/index.php/rtu/rtu_check_update/{mac}/reset_force_lp', [CAMRGatewayDeviceController::class,'force_load_profile_status_reset'])->name('force_load_profile_status_reset');
-
-//Route::redirectAction('/http_post_server.php', 'CAMRGatewayDeviceController@http_post_server_A');
-
-//Route::any('/http_post_server', [CAMRGatewayDeviceController::class, 'http_post_server'])->name('http_post_server');
-
-//Route::post('/http_post_server.php', function () {
- //   return redirect('/home/dashboard');
-//});
-//LoadProfileController
-//Route::get('/site', [CAMRSiteController::class,'site'])->name('site')->middleware('isLoggedIn');
-Route::any('/lp/receive_file.php', [LoadProfileController::class,'LoadProfile'])->name('receive_file');
-
-
-//Route::redirect('/http_post_server.php', '/there');
-
-/*
-Route::match(array('GET', 'POST', 'PUT'), "/", array(
-    'uses' => 'LoadProfileController@index',
-    'as' => 'index'
-)); 
-*/
-
-//Route::controller('users', 'LoadProfileController');
 
 /*Configuation File Info*/
 Route::get('/configuration_file', [ConfigurationFileController::class,'ConfigurationFile'])->name('ConfigurationFile')->middleware('isLoggedIn');

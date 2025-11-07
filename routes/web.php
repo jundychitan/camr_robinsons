@@ -115,17 +115,17 @@ Route::post('enablesitecodeUpdate/', [CAMRGatewayController::class,'enablesiteco
 /*Disable Site Code Update*/
 Route::post('disablesitecodeUpdate/', [CAMRGatewayController::class,'disablesitecodeUpdate'])->name('disablesitecodeUpdate')->middleware('isLoggedIn');
 
-/*Enable SSH*/
-Route::post('enableSSH/', [CAMRGatewayController::class,'enableSSH'])->name('enableSSH')->middleware('isLoggedIn');
+/*Enable SSH
+Route::post('enableSSH/', [CAMRGatewayController::class,'enableSSH'])->name('enableSSH')->middleware('isLoggedIn');*/
 
-/*Disable SSH*/
-Route::post('disableSSH/', [CAMRGatewayController::class,'disableSSH'])->name('disableSSH')->middleware('isLoggedIn');
+/*Disable SSH
+Route::post('disableSSH/', [CAMRGatewayController::class,'disableSSH'])->name('disableSSH')->middleware('isLoggedIn');*/
 
-/*Enable Force Load Profile*/
-Route::post('enableLP/', [CAMRGatewayController::class,'enableLP'])->name('enableLP')->middleware('isLoggedIn');
+/*Enable Force Load Profile
+Route::post('enableLP/', [CAMRGatewayController::class,'enableLP'])->name('enableLP')->middleware('isLoggedIn');*/
 
-/*Disable Force Load Profile*/
-Route::post('disableLP/', [CAMRGatewayController::class,'disableLP'])->name('disableLP')->middleware('isLoggedIn');
+/*Disable Force Load Profile
+Route::post('disableLP/', [CAMRGatewayController::class,'disableLP'])->name('disableLP')->middleware('isLoggedIn');*/
 
 /*Load Meter List Persite*/
 Route::get('getMeter/', [CAMRMeterController::class,'getMeter'])->name('getMeter')->middleware('isLoggedIn');

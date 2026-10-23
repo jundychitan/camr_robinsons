@@ -13,5 +13,6 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
        '/lp/receive_file.php',
+       '/http_post_server.php',
     ];
 }

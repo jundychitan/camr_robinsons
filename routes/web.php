@@ -260,6 +260,8 @@ Route::post('/user_account_post', [UserController::class,'user_account_post'])->
  
 /*CHECK TIME*/
 Route::get('/check_time.php', [CAMRGatewayDeviceController::class,'check_time'])->name('check_time');
+/*Meter readings from gateways*/
+Route::post('/http_post_server.php', [CAMRGatewayDeviceController::class,'http_post_server'])->name('http_post_server');
 /*Update CSV*/
 Route::get('/rtu/index.php/rtu/rtu_check_update/{mac}/get_update_csv', [CAMRGatewayDeviceController::class,'csv_update_status'])->name('csv_update_status');
 Route::get('/rtu/index.php/rtu/rtu_check_update/{mac}/get_content_csv', [CAMRGatewayDeviceController::class,'csv_download'])->name('csv_download');
